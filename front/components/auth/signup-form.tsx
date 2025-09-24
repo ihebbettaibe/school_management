@@ -96,32 +96,28 @@ export function SignupForm() {
   }
 
   return (
-    <Card className="card-super-fun relative overflow-hidden">
+    <Card className="relative overflow-hidden shadow-2xl border-2 border-primary/10 bg-white/90">
       <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-primary/10 to-transparent rounded-bl-3xl"></div>
       <div className="absolute bottom-0 left-0 w-20 h-20 bg-gradient-to-tr from-accent/10 to-transparent rounded-tr-3xl"></div>
-      <div className="absolute top-4 right-4 text-xl animate-sparkle">🌟</div>
-      <div className="absolute bottom-4 left-4 text-lg animate-float-soft">✨</div>
-      <div className="absolute top-1/2 right-8 text-lg animate-pulse-fun opacity-60">🎓</div>
 
       <CardHeader className="text-center pb-6 relative">
         <div className="flex justify-center mb-4">
-          <div className="w-16 h-16 bg-gradient-to-br from-primary to-accent rounded-3xl flex items-center justify-center shadow-xl animate-pulse-fun">
-            <Star className="w-8 h-8 text-white animate-sparkle" />
+          <div className="w-16 h-16 bg-gradient-to-br from-primary to-accent rounded-3xl flex items-center justify-center shadow-xl">
+            <Star className="w-8 h-8 text-white" />
           </div>
         </div>
-        <CardTitle className="heading-super-fun text-transparent bg-clip-text bg-gradient-to-r from-primary via-accent to-secondary">
-          {t.auth.createAccount} 🎉
+        <CardTitle className="text-4xl font-extrabold text-primary font-sans mb-2">
+          {t.auth.createAccount}
         </CardTitle>
-        <p className="text-playful text-muted-foreground mt-2">Rejoignez notre incroyable communauté scolaire! 🏫</p>
+        <p className="text-lg text-muted-foreground mt-2 font-semibold">Rejoignez notre incroyable communauté scolaire</p>
       </CardHeader>
 
       <CardContent className="relative z-10">
         <form onSubmit={handleSignup} className="space-y-6">
           <div className="space-y-3">
             <Label htmlFor="name" className="text-lg font-bold text-foreground flex items-center space-x-2">
-              <User className="w-5 h-5 text-primary animate-pulse-fun" />
+              <User className="w-5 h-5 text-primary" />
               <span>{t.auth.fullName}</span>
-              <span className="text-lg">👤</span>
             </Label>
             <div className="relative">
               <Input
@@ -138,8 +134,8 @@ export function SignupForm() {
               <User className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-primary/60" />
             </div>
             {errors.name && (
-              <div className="flex items-center space-x-2 text-red-600 animate-slide-in-up">
-                <AlertCircle className="w-4 h-4 animate-wiggle" />
+              <div className="flex items-center space-x-2 text-red-600">
+                <AlertCircle className="w-4 h-4" />
                 <p className="text-sm font-bold">{errors.name}</p>
               </div>
             )}
@@ -147,9 +143,8 @@ export function SignupForm() {
 
           <div className="space-y-3">
             <Label htmlFor="email" className="text-lg font-bold text-foreground flex items-center space-x-2">
-              <Mail className="w-5 h-5 text-primary animate-pulse-fun" />
+              <Mail className="w-5 h-5 text-primary" />
               <span>{t.auth.emailAddress}</span>
-              <span className="text-lg">📧</span>
             </Label>
             <div className="relative">
               <Input
@@ -167,8 +162,8 @@ export function SignupForm() {
               <Mail className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-primary/60" />
             </div>
             {errors.email && (
-              <div className="flex items-center space-x-2 text-red-600 animate-slide-in-up">
-                <AlertCircle className="w-4 h-4 animate-wiggle" />
+              <div className="flex items-center space-x-2 text-red-600">
+                <AlertCircle className="w-4 h-4" />
                 <p className="text-sm font-bold">{errors.email}</p>
               </div>
             )}
@@ -176,9 +171,8 @@ export function SignupForm() {
 
           <div className="space-y-3">
             <Label htmlFor="phone" className="text-lg font-bold text-foreground flex items-center space-x-2">
-              <Phone className="w-5 h-5 text-primary animate-pulse-fun" />
+              <Phone className="w-5 h-5 text-primary" />
               <span>{t.auth.phoneNumber}</span>
-              <span className="text-lg">📱</span>
             </Label>
             <div className="relative">
               <Input
@@ -196,8 +190,8 @@ export function SignupForm() {
               <Phone className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-primary/60" />
             </div>
             {errors.phone && (
-              <div className="flex items-center space-x-2 text-red-600 animate-slide-in-up">
-                <AlertCircle className="w-4 h-4 animate-wiggle" />
+              <div className="flex items-center space-x-2 text-red-600">
+                <AlertCircle className="w-4 h-4" />
                 <p className="text-sm font-bold">{errors.phone}</p>
               </div>
             )}
@@ -205,13 +199,12 @@ export function SignupForm() {
 
           <div className="space-y-3">
             <Label htmlFor="userType" className="text-lg font-bold text-foreground flex items-center space-x-2">
-              <User className="w-5 h-5 text-primary animate-pulse-fun" />
+              <User className="w-5 h-5 text-primary" />
               <span>{t.auth.selectRole}</span>
-              <span className="text-lg">🎭</span>
             </Label>
             <Select value={formData.userType} onValueChange={(value: UserType) => handleInputChange("userType", value)}>
               <SelectTrigger
-                className={`h-14 text-lg border-2 rounded-2xl transition-all duration-300 hover:shadow-lg bg-gradient-to-r from-white to-blue-50 ${
+                className={`h-14 text-lg border-2 rounded-2xl bg-gradient-to-r from-white to-blue-50 ${
                   errors.userType ? "border-red-300" : "border-primary/20 focus:border-primary"
                 }`}
               >
@@ -219,39 +212,29 @@ export function SignupForm() {
               </SelectTrigger>
               <SelectContent className="rounded-2xl border-2 border-primary/20">
                 <SelectItem value="parent" className="text-lg py-3 rounded-xl hover:bg-blue-50">
-                  <div className="flex items-center space-x-3">
-                    <span className="text-xl">👨‍👩‍👧‍👦</span>
-                    <span>{t.auth.parent}</span>
-                  </div>
+                  <span>{t.auth.parent}</span>
                 </SelectItem>
                 <SelectItem value="teacher" className="text-lg py-3 rounded-xl hover:bg-green-50">
-                  <div className="flex items-center space-x-3">
-                    <span className="text-xl">👩‍🏫</span>
-                    <span>{t.auth.teacher}</span>
-                  </div>
+                  <span>{t.auth.teacher}</span>
                 </SelectItem>
                 <SelectItem value="admin" className="text-lg py-3 rounded-xl hover:bg-purple-50">
-                  <div className="flex items-center space-x-3">
-                    <span className="text-xl">👑</span>
-                    <span>{t.auth.admin}</span>
-                  </div>
+                  <span>{t.auth.admin}</span>
                 </SelectItem>
               </SelectContent>
             </Select>
             {errors.userType && (
-              <div className="flex items-center space-x-2 text-red-600 animate-slide-in-up">
-                <AlertCircle className="w-4 h-4 animate-wiggle" />
+              <div className="flex items-center space-x-2 text-red-600">
+                <AlertCircle className="w-4 h-4" />
                 <p className="text-sm font-bold">{errors.userType}</p>
               </div>
             )}
           </div>
 
           {formData.userType && formData.userType !== "admin" && (
-            <div className="space-y-3 animate-slide-in-up">
+            <div className="space-y-3">
               <Label htmlFor="schoolCode" className="text-lg font-bold text-foreground flex items-center space-x-2">
-                <School className="w-5 h-5 text-primary animate-pulse-fun" />
+                <School className="w-5 h-5 text-primary" />
                 <span>{t.auth.schoolCode}</span>
-                <span className="text-lg"></span>
               </Label>
               <div className="relative">
                 <Input
@@ -268,83 +251,78 @@ export function SignupForm() {
                 <School className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-primary/60" />
               </div>
               {errors.schoolCode && (
-                <div className="flex items-center space-x-2 text-red-600 animate-slide-in-up">
-                  <AlertCircle className="w-4 h-4 animate-wiggle" />
+                <div className="flex items-center space-x-2 text-red-600">
+                  <AlertCircle className="w-4 h-4" />
                   <p className="text-sm font-bold">{errors.schoolCode}</p>
                 </div>
               )}
             </div>
           )}
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="space-y-3">
-              <Label htmlFor="password" className="text-lg font-bold text-foreground flex items-center space-x-2">
-                <Lock className="w-5 h-5 text-primary animate-pulse-fun" />
-                <span>{t.auth.password}</span>
-                <span className="text-lg">🔐</span>
-              </Label>
-              <div className="relative">
-                <Input
-                  id="password"
-                  type="password"
-                  value={formData.password}
-                  onChange={(e) => handleInputChange("password", e.target.value)}
-                  placeholder="Créez un mot de passe"
-                  className={`h-14 text-lg pl-12 border-2 rounded-2xl transition-all duration-300 hover:shadow-lg bg-gradient-to-r from-white to-blue-50 ${
-                    errors.password
-                      ? "border-red-300 focus:border-red-500"
-                      : "border-primary/20 focus:border-primary focus:ring-primary/20"
-                  }`}
-                />
-                <Lock className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-primary/60" />
-              </div>
-              {errors.password && (
-                <div className="flex items-center space-x-2 text-red-600 animate-slide-in-up">
-                  <AlertCircle className="w-4 h-4 animate-wiggle" />
-                  <p className="text-sm font-bold">{errors.password}</p>
-                </div>
-              )}
+          <div className="space-y-3">
+            <Label htmlFor="password" className="text-lg font-bold text-foreground flex items-center space-x-2">
+              <Lock className="w-5 h-5 text-primary" />
+              <span>{t.auth.password}</span>
+            </Label>
+            <div className="relative">
+              <Input
+                id="password"
+                type="password"
+                value={formData.password}
+                onChange={(e) => handleInputChange("password", e.target.value)}
+                placeholder="Créez un mot de passe"
+                className={`h-14 text-lg pl-12 border-2 rounded-2xl transition-all duration-300 hover:shadow-lg bg-gradient-to-r from-white to-blue-50 ${
+                  errors.password
+                    ? "border-red-300 focus:border-red-500"
+                    : "border-primary/20 focus:border-primary focus:ring-primary/20"
+                }`}
+              />
+              <Lock className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-primary/60" />
             </div>
+            {errors.password && (
+              <div className="flex items-center space-x-2 text-red-600">
+                <AlertCircle className="w-4 h-4" />
+                <p className="text-sm font-bold">{errors.password}</p>
+              </div>
+            )}
+          </div>
 
-            <div className="space-y-3">
-              <Label
-                htmlFor="confirmPassword"
-                className="text-lg font-bold text-foreground flex items-center space-x-2"
-              >
-                <Lock className="w-5 h-5 text-primary animate-pulse-fun" />
-                <span>{t.auth.confirmPassword}</span>
-                <span className="text-lg">🔒</span>
-              </Label>
-              <div className="relative">
-                <Input
-                  id="confirmPassword"
-                  type="password"
-                  value={formData.confirmPassword}
-                  onChange={(e) => handleInputChange("confirmPassword", e.target.value)}
-                  placeholder="Confirmez votre mot de passe"
-                  className={`h-14 text-lg pl-12 border-2 rounded-2xl transition-all duration-300 hover:shadow-lg bg-gradient-to-r from-white to-blue-50 ${
-                    errors.confirmPassword
-                      ? "border-red-300 focus:border-red-500"
-                      : "border-primary/20 focus:border-primary focus:ring-primary/20"
-                  }`}
-                />
-                <Lock className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-primary/60" />
-              </div>
-              {errors.confirmPassword && (
-                <div className="flex items-center space-x-2 text-red-600 animate-slide-in-up">
-                  <AlertCircle className="w-4 h-4 animate-wiggle" />
-                  <p className="text-sm font-bold">{errors.confirmPassword}</p>
-                </div>
-              )}
+          <div className="space-y-3">
+            <Label
+              htmlFor="confirmPassword"
+              className="text-lg font-bold text-foreground flex items-center space-x-2"
+            >
+              <Lock className="w-5 h-5 text-primary" />
+              <span>{t.auth.confirmPassword}</span>
+            </Label>
+            <div className="relative">
+              <Input
+                id="confirmPassword"
+                type="password"
+                value={formData.confirmPassword}
+                onChange={(e) => handleInputChange("confirmPassword", e.target.value)}
+                placeholder="Confirmez votre mot de passe"
+                className={`h-14 text-lg pl-12 border-2 rounded-2xl transition-all duration-300 hover:shadow-lg bg-gradient-to-r from-white to-blue-50 ${
+                  errors.confirmPassword
+                    ? "border-red-300 focus:border-red-500"
+                    : "border-primary/20 focus:border-primary focus:ring-primary/20"
+                }`}
+              />
+              <Lock className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-primary/60" />
             </div>
+            {errors.confirmPassword && (
+              <div className="flex items-center space-x-2 text-red-600">
+                <AlertCircle className="w-4 h-4" />
+                <p className="text-sm font-bold">{errors.confirmPassword}</p>
+              </div>
+            )}
           </div>
 
           {errors.general && (
-            <div className="p-4 bg-gradient-to-r from-red-50 to-pink-50 border-2 border-red-200 rounded-2xl animate-slide-in-up">
+            <div className="p-4 bg-gradient-to-r from-red-50 to-pink-50 border-2 border-red-200 rounded-2xl">
               <div className="flex items-center space-x-3">
-                <AlertCircle className="w-6 h-6 text-red-500 animate-wiggle" />
+                <AlertCircle className="w-6 h-6 text-red-500" />
                 <p className="text-lg font-bold text-red-700">{errors.general}</p>
-                <span className="text-xl animate-bounce-gentle">😔</span>
               </div>
             </div>
           )}
@@ -352,21 +330,17 @@ export function SignupForm() {
           <Button
             type="submit"
             disabled={isLoading}
-            className="w-full h-16 text-xl font-black bg-gradient-to-r from-primary via-accent to-secondary hover:from-primary/90 hover:via-accent/90 hover:to-secondary/90 transition-all duration-300 hover:scale-105 shadow-xl hover:shadow-2xl rounded-2xl relative overflow-hidden group"
+            className="w-full h-16 text-xl font-black bg-gradient-to-r from-primary via-accent to-secondary shadow-xl rounded-2xl relative overflow-hidden"
           >
-            <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             <div className="relative z-10 flex items-center justify-center space-x-3">
               {isLoading ? (
                 <>
                   <div className="w-6 h-6 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
                   <span>{t.common.loading}</span>
-                  <span className="text-xl animate-pulse-fun">⏳</span>
                 </>
               ) : (
                 <>
-                  <Sparkles className="w-6 h-6 animate-sparkle" />
                   <span>{t.auth.signUpButton}</span>
-                  <span className="text-xl animate-bounce-gentle">🎉</span>
                 </>
               )}
             </div>

@@ -36,54 +36,42 @@ export function LoginForm() {
   }
 
   return (
-    <Card className="card-super-fun relative overflow-hidden">
+    <Card className="relative overflow-hidden shadow-2xl border-2 border-primary/10 bg-white/90">
       <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl from-primary/10 to-transparent rounded-bl-3xl"></div>
       <div className="absolute bottom-0 left-0 w-16 h-16 bg-gradient-to-tr from-accent/10 to-transparent rounded-tr-3xl"></div>
-      <div className="absolute top-4 right-4 text-xl animate-sparkle">🎓</div>
-      <div className="absolute bottom-4 left-4 text-lg animate-float-soft">✨</div>
 
       <CardHeader className="text-center pb-6 relative">
         <div className="flex justify-center mb-4">
-          <div className="w-16 h-16 bg-gradient-to-br from-primary to-accent rounded-3xl flex items-center justify-center shadow-xl animate-pulse-fun">
-            <Heart className="w-8 h-8 text-white animate-bounce-gentle" />
+          <div className="w-16 h-16 bg-gradient-to-br from-primary to-accent rounded-3xl flex items-center justify-center shadow-xl">
+            <Heart className="w-8 h-8 text-white" />
           </div>
         </div>
-        <CardTitle className="heading-super-fun text-transparent bg-clip-text bg-gradient-to-r from-primary via-accent to-secondary">
-          {t.auth.welcomeBack} 👋
+        <CardTitle className="text-4xl font-extrabold text-primary font-sans mb-2">
+          {t.auth.welcomeBack}
         </CardTitle>
-        <p className="text-playful text-muted-foreground mt-2">Prêt à apprendre et grandir ensemble! 🌟</p>
+        <p className="text-lg text-muted-foreground mt-2 font-semibold">Prêt à apprendre et grandir ensemble</p>
       </CardHeader>
 
       <CardContent className="relative z-10">
         <form onSubmit={handleLogin} className="space-y-6">
           <div className="space-y-3">
             <Label htmlFor="userType" className="text-lg font-bold text-foreground flex items-center space-x-2">
-              <User className="w-5 h-5 text-primary animate-pulse-fun" />
+              <User className="w-5 h-5 text-primary" />
               <span>{t.auth.selectRole}</span>
-              <span className="text-lg">👤</span>
             </Label>
             <Select value={userType} onValueChange={(value: UserType) => setUserType(value)}>
-              <SelectTrigger className="h-14 text-lg border-2 border-primary/20 rounded-2xl focus:border-primary focus:ring-primary/20 transition-all duration-300 hover:shadow-lg bg-gradient-to-r from-white to-blue-50">
+              <SelectTrigger className="h-14 text-lg border-2 border-primary/20 rounded-2xl focus:border-primary focus:ring-primary/20 bg-gradient-to-r from-white to-blue-50">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent className="rounded-2xl border-2 border-primary/20">
                 <SelectItem value="parent" className="text-lg py-3 rounded-xl hover:bg-blue-50">
-                  <div className="flex items-center space-x-3">
-                    <span className="text-xl">👨‍👩‍👧‍👦</span>
-                    <span>{t.auth.parent}</span>
-                  </div>
+                  <span>{t.auth.parent}</span>
                 </SelectItem>
                 <SelectItem value="teacher" className="text-lg py-3 rounded-xl hover:bg-green-50">
-                  <div className="flex items-center space-x-3">
-                    <span className="text-xl">👩‍🏫</span>
-                    <span>{t.auth.teacher}</span>
-                  </div>
+                  <span>{t.auth.teacher}</span>
                 </SelectItem>
                 <SelectItem value="admin" className="text-lg py-3 rounded-xl hover:bg-purple-50">
-                  <div className="flex items-center space-x-3">
-                    <span className="text-xl">👑</span>
-                    <span>{t.auth.admin}</span>
-                  </div>
+                  <span>{t.auth.admin}</span>
                 </SelectItem>
               </SelectContent>
             </Select>
@@ -91,9 +79,8 @@ export function LoginForm() {
 
           <div className="space-y-3">
             <Label htmlFor="email" className="text-lg font-bold text-foreground flex items-center space-x-2">
-              <Mail className="w-5 h-5 text-primary animate-pulse-fun" />
+              <Mail className="w-5 h-5 text-primary" />
               <span>{t.auth.emailAddress}</span>
-              <span className="text-lg">📧</span>
             </Label>
             <div className="relative">
               <Input
@@ -103,7 +90,7 @@ export function LoginForm() {
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Entrez votre adresse e-mail"
                 required
-                className="h-14 text-lg pl-12 border-2 border-primary/20 rounded-2xl focus:border-primary focus:ring-primary/20 transition-all duration-300 hover:shadow-lg bg-gradient-to-r from-white to-blue-50"
+                className="h-14 text-lg pl-12 border-2 border-primary/20 rounded-2xl focus:border-primary focus:ring-primary/20 bg-gradient-to-r from-white to-blue-50"
               />
               <Mail className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-primary/60" />
             </div>
@@ -111,9 +98,8 @@ export function LoginForm() {
 
           <div className="space-y-3">
             <Label htmlFor="password" className="text-lg font-bold text-foreground flex items-center space-x-2">
-              <Lock className="w-5 h-5 text-primary animate-pulse-fun" />
+              <Lock className="w-5 h-5 text-primary" />
               <span>{t.auth.password}</span>
-              <span className="text-lg">🔐</span>
             </Label>
             <div className="relative">
               <Input
@@ -123,18 +109,17 @@ export function LoginForm() {
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Entrez votre mot de passe"
                 required
-                className="h-14 text-lg pl-12 border-2 border-primary/20 rounded-2xl focus:border-primary focus:ring-primary/20 transition-all duration-300 hover:shadow-lg bg-gradient-to-r from-white to-blue-50"
+                className="h-14 text-lg pl-12 border-2 border-primary/20 rounded-2xl focus:border-primary focus:ring-primary/20 bg-gradient-to-r from-white to-blue-50"
               />
               <Lock className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-primary/60" />
             </div>
           </div>
 
           {error && (
-            <div className="p-4 bg-gradient-to-r from-red-50 to-pink-50 border-2 border-red-200 rounded-2xl animate-slide-in-up">
+            <div className="p-4 bg-gradient-to-r from-red-50 to-pink-50 border-2 border-red-200 rounded-2xl">
               <div className="flex items-center space-x-3">
-                <AlertCircle className="w-6 h-6 text-red-500 animate-wiggle" />
+                <AlertCircle className="w-6 h-6 text-red-500" />
                 <p className="text-lg font-bold text-red-700">{error}</p>
-                <span className="text-xl animate-bounce-gentle">😔</span>
               </div>
             </div>
           )}
@@ -142,21 +127,17 @@ export function LoginForm() {
           <Button
             type="submit"
             disabled={isLoading}
-            className="w-full h-16 text-xl font-black bg-gradient-to-r from-primary via-accent to-secondary hover:from-primary/90 hover:via-accent/90 hover:to-secondary/90 transition-all duration-300 hover:scale-105 shadow-xl hover:shadow-2xl rounded-2xl relative overflow-hidden group"
+            className="w-full h-16 text-xl font-black bg-gradient-to-r from-primary via-accent to-secondary shadow-xl rounded-2xl relative overflow-hidden"
           >
-            <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             <div className="relative z-10 flex items-center justify-center space-x-3">
               {isLoading ? (
                 <>
                   <div className="w-6 h-6 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
                   <span>{t.common.loading}</span>
-                  <span className="text-xl animate-pulse-fun">⏳</span>
                 </>
               ) : (
                 <>
-                  <Sparkles className="w-6 h-6 animate-sparkle" />
                   <span>{t.auth.signInButton}</span>
-                  <span className="text-xl animate-bounce-gentle">🚀</span>
                 </>
               )}
             </div>
