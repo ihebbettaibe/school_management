@@ -1,0 +1,248 @@
+openapi: "3.1.0"
+
+info:
+    title: DILO API
+    description: "API documentation for the DILO backend service"
+    version: "1.0.0"
+
+servers:
+    -   url: "http://localhost:8080"
+        description: Local Server
+
+components:
+    schemas:
+        Login:
+            type: object
+            properties:
+                email:
+                    type: string
+                password:
+                    type: string
+            required:
+                - email
+                - password
+        Register:
+            type: object
+            properties:
+                email:
+                    type: string
+                password:
+                    type: string
+                firstName:
+                    type: string
+                lastName:
+                    type: string
+                schoolCode:
+                    type: string
+                role:
+                    type: string
+            required:
+                - email
+                - password
+                - firstName
+                - lastName
+                - schoolCode
+                - role
+        Notification:
+            type: object
+            properties:
+                title:
+                    type: string
+                body:
+                    type: string
+            required:
+                - title
+                - message
+
+paths:
+    /api/v1/auth/login:
+        post:
+            tags:
+                - Auth
+            summary: "Login user"
+            description: "Authenticate user and return a token"
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/Login"
+                        examples:
+                            example-1:
+                                summary: "Administrator Credentials: Coleman Bashirian"
+                                value:
+                                    email: Coleman_Bashirian91@gmail.com
+                                    password: password123
+                            example-2:
+                                summary: "Teacher Credentials: Rachelle Crooks"
+                                value:
+                                    email: Rachelle34@hotmail.com
+                                    password: password123
+                            example-3:
+                                summary: "Parent Credentials: Elinor Harber"
+                                value:
+                                    email: Elinor.Harber@yahoo.com
+                                    password: password123
+            responses:
+                "200":
+                    description: "Successful Login"
+    /api/v1/auth/register:
+        post:
+            tags:
+                - Auth
+            summary: "Create account"
+            description: "Register a new user account"
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/Register"
+                responses:
+                "200":
+                    description: "OK"
+    /api/v1/auth/logout:
+        post:
+            tags:
+                - Auth
+            summary: "Logout user"
+            description: "Logout user and invalidate the token"
+            responses:
+                "200":
+                    description: "OK"
+    /api/v1/auth/me:
+        get:
+            tags:
+                - Auth
+            summary: "Get current user"
+            description: "Retrieve information about the currently authenticated user"
+            responses:
+                "200":
+                    description: "OK"
+
+    /api/v1/notifications/test:
+        post:
+            tags:
+                - Notifications
+            summary: "Test notification"
+            description: "Send a test notification to verify the notification system"
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/Notification"
+                        examples:
+                            example-1:
+                                summary: "Notification Example: System Maintenance"
+                                value:
+                                    title: "System Maintenance"
+                                    body: "The system will be down for maintenance on Saturday from 2 AM to 4 AM."
+                            example-2:
+                                summary: "Notification Example: New Feature Release"
+                                value:
+                                    title: "New Feature Release"
+                                    body: "We are excited to announce the release of new features in our application. Check them out now!"
+                            example-3:
+                                summary: "Notification Example: Security Alert"
+                                value:
+                                    title: "Security Alert"
+                                    body: "Please update your password immediately due to a recent security breach. Contact support if you need assistance."
+            responses:
+                "200":
+                    description: "OK"
+
+    /api/v1/users:
+        get:
+            tags:
+                - Users
+            summary: "Get all users"
+            description: "Retrieve a list of all users"
+            responses:
+                "200":
+                    description: "OK"
+        post:
+            tags:
+                - Users
+            summary: "Create user"
+            description: "Create a new user"
+            responses:
+                "200":
+                    description: "OK"
+    /api/v1/users/teachers:
+        get:
+            tags:
+                - Users
+            summary: "Get teachers"
+            description: "Retrieve a list of teachers with filtering options"
+            responses:
+                "200":
+                    description: "OK"
+    /api/v1/users/parents:
+        get:
+            tags:
+                - Users
+            summary: "Get all parents"
+            description: "Retrieve a list of parents with filtering options"
+            responses:
+                "200":
+                    description: "OK"
+
+    /api/v1/users/{id}:
+        get:
+            tags:
+                - Users
+            summary: "Get user by ID"
+            description: "Retrieve user information by user ID"
+            parameters:
+                -   name: "id"
+                    in: "path"
+                    required: true
+                    schema:
+                        type: "string"
+            responses:
+                "200":
+                    description: "OK"
+        patch:
+            tags:
+                - Users
+            summary: "Update user"
+            description: "Update user information by user ID"
+            parameters:
+                -   name: "id"
+                    in: "path"
+                    required: true
+                    schema:
+                        type: "string"
+            responses:
+                "200":
+                    description: "OK"
+        delete:
+            tags:
+                - Users
+            summary: "Delete user"
+            description: "Delete user by user ID"
+            parameters:
+                -   name: "id"
+                    in: "path"
+                    required: true
+                    schema:
+                        type: "string"
+            responses:
+                "200":
+                    description: "OK"
+    /api/v1/users/email/{email}:
+        get:
+            tags:
+                - Users
+            summary: "Get user by email"
+            description: "Retrieve user information by email address"
+            parameters:
+                -   name: "email"
+                    in: "path"
+                    required: true
+                    schema:
+                        type: "string"
+            responses:
+                "200":
+                    description: "OK"

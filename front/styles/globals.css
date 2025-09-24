@@ -1,0 +1,60 @@
+import { motion } from "framer-motion";
+
+export default function HomePage() {
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50 text-gray-800">
+      {/* Hero Section */}
+      <section className="flex flex-col items-center justify-center text-center py-20 px-6">
+        <motion.h1
+          initial={{ opacity: 0, y: -30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="text-5xl font-extrabold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent"
+        >
+          Welcome to Your School Hub
+        </motion.h1>
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2, duration: 0.8 }}
+          className="mt-6 text-lg text-gray-600 max-w-2xl"
+        >
+          A modern platform for students, teachers, and schools to connect, share,
+          and grow together.
+        </motion.p>
+        <motion.button
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          className="mt-8 px-6 py-3 rounded-2xl bg-gradient-to-r from-indigo-500 to-purple-500 text-white shadow-lg hover:shadow-xl transition"
+        >
+          Get Started
+        </motion.button>
+      </section>
+
+      {/* Features Section */}
+      <section className="py-16 px-6 grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        {[
+          { title: "Interactive Feed", desc: "Stay updated with posts, announcements, and events." },
+          { title: "Analytics Dashboard", desc: "Track your progress and school-wide stats easily." },
+          { title: "Secure Payments", desc: "Simple and secure tuition & fee management." },
+        ].map((f, i) => (
+          <motion.div
+            key={i}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: i * 0.2, duration: 0.7 }}
+            className="p-6 rounded-2xl bg-white shadow-md hover:shadow-xl transition"
+          >
+            <h3 className="text-xl font-bold text-indigo-600">{f.title}</h3>
+            <p className="mt-2 text-gray-600">{f.desc}</p>
+          </motion.div>
+        ))}
+      </section>
+
+      {/* Footer */}
+      <footer className="py-6 text-center text-gray-500 border-t">
+        © {new Date().getFullYear()} Your School Hub. All rights reserved.
+      </footer>
+    </div>
+  );
+}
