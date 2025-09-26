@@ -49,9 +49,9 @@ const mockChildProfiles: ChildProfile[] = [
     grade: "Grade 5",
     class: "5-A",
     fees: {
-      registration: 150,
-      monthly: 80,
-      activities: 25,
+      registration: 15,
+      monthly: 8,
+      activities: 2,
     },
   },
   {
@@ -60,9 +60,9 @@ const mockChildProfiles: ChildProfile[] = [
     grade: "Grade 3",
     class: "3-B",
     fees: {
-      registration: 150,
-      monthly: 75,
-      activities: 20,
+      registration: 15,
+      monthly: 7,
+      activities:3 ,
     },
   },
 ]

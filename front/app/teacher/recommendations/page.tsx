@@ -10,7 +10,8 @@ export default function TeacherRecommendationsPage() {
           <p className="text-muted-foreground">Submit suggestions for school improvements</p>
         </div>
 
-        <RecommendationsCenter userType="teacher" />
+        // MVP: This page is commented out for now. Will be used in future updates.
+        // <RecommendationsCenter userType="teacher" />
       </div>
     </AppLayout>
   )

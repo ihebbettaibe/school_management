@@ -10,7 +10,8 @@ export default function TeacherFeedPage() {
           <p className="text-2xl text-muted-foreground font-semibold">Stay updated with school announcements and events</p>
         </div>
 
-        <SchoolFeed userType="teacher" />
+          // MVP: This page is commented out for now. Will be used in future updates.
+          // <SchoolFeed userType="teacher" />
       </div>
     </AppLayout>
   )

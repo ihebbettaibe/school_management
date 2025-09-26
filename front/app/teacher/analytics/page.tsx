@@ -10,7 +10,7 @@ export default function TeacherAnalyticsPage() {
           <p className="text-4xl text-muted-foreground font-bold mt-2">View class performance and student progress</p>
         </div>
 
-        <AnalyticsDashboard userType="teacher" />
+          <AnalyticsDashboard userType="teacher" />
       </div>
     </AppLayout>
   )

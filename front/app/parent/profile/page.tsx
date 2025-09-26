@@ -6,10 +6,10 @@ export default function ParentProfilePage() {
   return (
     <ProtectedRoute allowedRoles={["parent"]}>
       <AppLayout>
-        <div className="p-4 space-y-6">
+        <div className="p-16 space-y-16 max-w-4xl mx-auto">
           <div>
-            <h1 className="text-2xl font-bold text-foreground">Profile</h1>
-            <p className="text-muted-foreground">Manage your profile and children's information</p>
+            <h1 className="text-6xl font-extrabold text-primary font-sans mb-4">Profile</h1>
+            <p className="text-2xl text-muted-foreground font-semibold">Manage your profile and children's information</p>
           </div>
 
           <ParentProfile />

@@ -62,14 +62,6 @@ export function Navigation({ userType }: NavigationProps) {
             description: "Vérifier la présence de vos enfants",
           },
           {
-            href: "/parent/feed",
-            label: t.navigation.schoolFeed,
-            icon: MessageSquare,
-            color: "from-orange-500 to-orange-600",
-            emoji: "💬",
-            description: "Actualités et communications de l'école",
-          },
-          {
             href: "/parent/notifications",
             label: t.navigation.notifications,
             icon: Bell,
@@ -85,14 +77,6 @@ export function Navigation({ userType }: NavigationProps) {
             color: "from-teal-500 to-teal-600",
             emoji: "📊",
             description: "Progrès et statistiques académiques",
-          },
-          {
-            href: "/parent/recommendations",
-            label: t.navigation.suggestions,
-            icon: Lightbulb,
-            color: "from-yellow-500 to-yellow-600",
-            emoji: "💡",
-            description: "Suggestions et recommandations",
           },
           {
             href: "/parent/payment",

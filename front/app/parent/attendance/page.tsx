@@ -14,8 +14,8 @@ export default function ParentAttendancePage() {
       <div className="p-6 space-y-6 bg-background min-h-[80vh]">
         <div className="flex flex-col space-y-2 md:flex-row md:items-end md:justify-between md:space-y-0 border-b pb-4">
           <div>
-            <h1 className="text-2xl font-semibold text-foreground tracking-tight font-sans">Attendance History</h1>
-            <p className="text-base text-foreground font-medium font-sans mt-1">Review your child's attendance record</p>
+            <h1 className="text-6xl font-extrabold text-primary tracking-tight font-sans mb-2">Attendance History</h1>
+            <p className="text-2xl text-muted-foreground font-semibold font-sans">Review your child's attendance record</p>
           </div>
           <ChildSelector children={mockChildren} />
         </div>

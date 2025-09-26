@@ -4,10 +4,10 @@ import { NotificationCenter } from "@/components/notifications/notification-cent
 export default function ParentNotificationsPage() {
   return (
     <AppLayout>
-      <div className="p-4 space-y-6">
+      <div className="p-16 space-y-16 max-w-6xl mx-auto">
         <div>
-          <h1 className="text-2xl font-bold text-foreground">Notifications</h1>
-          <p className="text-muted-foreground">Stay updated with your child's school activities</p>
+          <h1 className="text-6xl font-extrabold text-primary font-sans mb-4">Notifications</h1>
+          <p className="text-2xl text-muted-foreground font-semibold">Stay updated with your child's school activities</p>
         </div>
 
         <NotificationCenter userType="parent" />
