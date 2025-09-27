@@ -118,10 +118,58 @@ export interface Translations {
     childUpdated: string
     childDeleted: string
   }
+
+  // Schedule (NEW)
+  schedule: {
+    addGrade: string
+    addGradePlaceholder: string
+    addClass: string
+    addClassPlaceholder: string
+    publish: string
+    addTimeSlot: string
+    addTimeSlotHint: string
+    noScheduleForDay: string
+    selectTime: string
+    selectSubject: string
+    time: string
+    subject: string
+    teacher: string
+    teacherNamePlaceholder: string
+    selectGradeClassTitle: string
+    selectGradeClassHint: string
+    days: { [key: string]: string }
+  }
 }
 
 export const translations: Record<Language, Translations> = {
   en: {
+    schedule: {
+      addGrade: "Add Grade",
+      addGradePlaceholder: "Add new grade (e.g., Grade 3)",
+      addClass: "Add Class",
+      addClassPlaceholder: "Add new class (e.g., Class D)",
+      publish: "Publish Schedule",
+      addTimeSlot: "Add Time Slot",
+      addTimeSlotHint: "Click 'Add Time Slot' to get started",
+      noScheduleForDay: "No schedule set for {day}",
+      selectTime: "Select time",
+      selectSubject: "Select subject",
+      time: "Time",
+      subject: "Subject",
+      teacher: "Teacher",
+      teacherNamePlaceholder: "Teacher name",
+      selectGradeClassTitle: "Select a Grade and Class",
+      selectGradeClassHint: "Choose a grade and class from the left to manage its schedule",
+      days: {
+        Monday: "Monday",
+        Tuesday: "Tuesday",
+        Wednesday: "Wednesday",
+        Thursday: "Thursday",
+        Friday: "Friday",
+        Saturday: "Saturday",
+        Sunday: "Sunday"
+      }
+    },
     common: {
       signIn: "Sign In",
       signUp: "Sign Up",
@@ -231,6 +279,33 @@ export const translations: Record<Language, Translations> = {
     },
   },
   ar: {
+    schedule: {
+      addGrade: "إضافة صف",
+      addGradePlaceholder: "أضف صف جديد (مثال: الصف الثالث)",
+      addClass: "إضافة فصل",
+      addClassPlaceholder: "أضف فصل جديد (مثال: فصل د)",
+      publish: "نشر الجدول",
+      addTimeSlot: "إضافة فترة زمنية",
+      addTimeSlotHint: "انقر على 'إضافة فترة زمنية' للبدء",
+      noScheduleForDay: "لا يوجد جدول ليوم {day}",
+      selectTime: "اختر الوقت",
+      selectSubject: "اختر المادة",
+      time: "الوقت",
+      subject: "المادة",
+      teacher: "المعلم",
+      teacherNamePlaceholder: "اسم المعلم",
+      selectGradeClassTitle: "اختر صفاً وفصلاً",
+      selectGradeClassHint: "اختر صفاً وفصلاً من القائمة لإدارة الجدول",
+      days: {
+        Monday: "الاثنين",
+        Tuesday: "الثلاثاء",
+        Wednesday: "الأربعاء",
+        Thursday: "الخميس",
+        Friday: "الجمعة",
+        Saturday: "السبت",
+        Sunday: "الأحد"
+      }
+    },
     common: {
       signIn: "تسجيل الدخول",
       signUp: "إنشاء حساب",
@@ -339,6 +414,33 @@ export const translations: Record<Language, Translations> = {
     },
   },
   fr: {
+    schedule: {
+      addGrade: "Ajouter un niveau",
+      addGradePlaceholder: "Ajouter un nouveau niveau (ex: 3ème)",
+      addClass: "Ajouter une classe",
+      addClassPlaceholder: "Ajouter une nouvelle classe (ex: Classe D)",
+      publish: "Publier l'emploi du temps",
+      addTimeSlot: "Ajouter un créneau",
+      addTimeSlotHint: "Cliquez sur 'Ajouter un créneau' pour commencer",
+      noScheduleForDay: "Aucun emploi du temps pour {day}",
+      selectTime: "Sélectionner l'heure",
+      selectSubject: "Sélectionner la matière",
+      time: "Heure",
+      subject: "Matière",
+      teacher: "Enseignant",
+      teacherNamePlaceholder: "Nom de l'enseignant",
+      selectGradeClassTitle: "Sélectionnez un niveau et une classe",
+      selectGradeClassHint: "Choisissez un niveau et une classe à gauche pour gérer l'emploi du temps",
+      days: {
+        Monday: "Lundi",
+        Tuesday: "Mardi",
+        Wednesday: "Mercredi",
+        Thursday: "Jeudi",
+        Friday: "Vendredi",
+        Saturday: "Samedi",
+        Sunday: "Dimanche"
+      }
+    },
     common: {
       signIn: "Se connecter",
       signUp: "S'inscrire",

@@ -401,7 +401,7 @@ export function ParentProfile() {
               ))}
             </div>
           </div>
-  </TabsContent>
+        </TabsContent>
 
         <TabsContent value="meetings">
           <Card className="card-super-fun relative overflow-hidden">
@@ -455,8 +455,9 @@ export function ParentProfile() {
                         </Button>
                         <Button
                           size="sm"
+                          variant="outline"
                           onClick={() => handleMeetingResponse(request.id, "decline")}
-                          className="btn-fun bg-white text-primary border border-primary hover:bg-gray-100"
+                          className="btn-fun"
                         >
                           {t.common.reject}
                         </Button>
