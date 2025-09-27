@@ -6,7 +6,29 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { NotificationItem } from "./notification-item"
-import { CheckCheck, Filter } from "lucide-react"
+import { CheckCheck, Filter, MessageSquare } from "lucide-react"
+import { Heart } from "lucide-react"
+// Mock meeting requests (moved from parent-profile)
+const mockMeetingRequests = [
+  {
+    id: "1",
+    teacherName: "Ms. Rodriguez",
+    subject: "Mathematics",
+    childName: "Emma Johnson",
+    requestedDate: "2024-01-15",
+    reason: "Discuss Emma's progress in advanced math topics",
+    status: "pending",
+  },
+  {
+    id: "2",
+    teacherName: "Mr. Thompson",
+    subject: "English",
+    childName: "Liam Johnson",
+    requestedDate: "2024-01-18",
+    reason: "Review reading comprehension improvement strategies",
+    status: "accepted",
+  },
+]
 
 interface Notification {
   id: string
@@ -147,6 +169,19 @@ const getAdminNotifications = (): Notification[] => [
 ]
 
 export function NotificationCenter({ userType }: NotificationCenterProps) {
+  // Dummy translation object for meeting actions
+  const t = {
+    common: {
+      approve: "Accepter",
+      reject: "Refuser",
+    },
+  }
+
+  // Dummy meeting response handler
+  const handleMeetingResponse = (requestId: string, response: "accept" | "decline") => {
+    // In real app, this would update the database
+    console.log(`Meeting request ${requestId} ${response}ed`)
+  }
   const [notifications, setNotifications] = useState<Notification[]>(
     userType === "admin" ? getAdminNotifications() : mockNotifications,
   )
@@ -242,6 +277,7 @@ export function NotificationCenter({ userType }: NotificationCenterProps) {
           <TabsTrigger value="action">Action ({actionRequiredCount})</TabsTrigger>
           <TabsTrigger value="assignments">Devoirs ({getNotificationsByType("assignment").length})</TabsTrigger>
           <TabsTrigger value="high">Priorité haute ({filterNotifications("high").length})</TabsTrigger>
+          <TabsTrigger value="meetings">Réunions</TabsTrigger>
         </TabsList>
 
         <TabsContent value="all" className="space-y-3">
@@ -297,6 +333,81 @@ export function NotificationCenter({ userType }: NotificationCenterProps) {
               userType={userType}
             />
           ))}
+        </TabsContent>
+        <TabsContent value="meetings" className="space-y-3">
+          {/* Meeting requests UI moved from parent-profile.tsx */}
+          <Card className="card-super-fun relative overflow-hidden">
+            <div className="absolute top-4 right-4 text-2xl animate-bounce-gentle">💬</div>
+            <CardHeader>
+              <CardTitle className="heading-super-fun flex items-center space-x-3">
+                <MessageSquare className="w-8 h-8 text-primary animate-pulse-fun" />
+                <span>Demandes de réunion</span>
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-6">
+                {mockMeetingRequests.map((request: {
+                  id: string;
+                  teacherName: string;
+                  subject: string;
+                  childName: string;
+                  requestedDate: string;
+                  reason: string;
+                  status: string;
+                }) => (
+                  <div
+                    key={request.id}
+                    className="p-6 bg-gradient-to-r from-gray-50 to-blue-50 rounded-2xl border-2 border-gray-200 hover:shadow-lg transition-all duration-300"
+                  >
+                    <div className="flex justify-between items-start mb-4">
+                      <div className="flex items-start space-x-4">
+                        <div className="text-3xl">👨‍🏫</div>
+                        <div>
+                          <h4 className="text-xl font-bold text-primary font-sans">{request.teacherName}</h4>
+                          <p className="text-lg font-semibold text-primary/80 font-sans">{request.subject}</p>
+                          <Badge
+                            variant={request.status === "pending" ? "default" : "secondary"}
+                            className="mt-2 text-sm font-bold px-3 py-1 rounded-full"
+                          >
+                            {request.status === "pending" ? "En attente" : "Acceptée"}
+                          </Badge>
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <p className="text-sm font-semibold text-primary/70 font-sans">Pour: {request.childName}</p>
+                        <p className="text-sm font-semibold text-primary/70 font-sans">Date: {request.requestedDate}</p>
+                      </div>
+                    </div>
+
+                    <div className="mb-4">
+                      <p className="text-base font-medium text-primary/80 font-sans">{request.reason}</p>
+                    </div>
+
+                    {request.status === "pending" && (
+                      <div className="flex space-x-4">
+                        <Button
+                          size="sm"
+                          onClick={() => handleMeetingResponse(request.id, "accept")}
+                          className="btn-primary-fun"
+                        >
+                          <Heart className="w-4 h-4 mr-2" />
+                          {t.common.approve}
+                        </Button>
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          onClick={() => handleMeetingResponse(request.id, "decline")}
+                          className="btn-fun"
+                        >
+                          {t.common.reject}
+                        </Button>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
         </TabsContent>
       </Tabs>
     </div>

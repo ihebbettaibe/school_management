@@ -74,9 +74,19 @@ export function ParentProfile() {
   const [meetingRequests] = useState(mockMeetingRequests)
   const [isEditingParent, setIsEditingParent] = useState(false)
   const [isAddingChild, setIsAddingChild] = useState(false)
-  const [editingChild, setEditingChild] = useState(null)
+  type Child = {
+    id: string
+    name: string
+    age: number
+    gender: string
+    year: string
+    class: string
+    picture: string
+  }
+  const [editingChild, setEditingChild] = useState<Child | null>(null)
 
-  const [notificationSettings, setNotificationSettings] = useState({
+  type NotificationSettingKey = "grades" | "announcements" | "emergencies" | "meetings";
+  const [notificationSettings, setNotificationSettings] = useState<Record<NotificationSettingKey, boolean>>({
     grades: true,
     announcements: true,
     emergencies: true,
@@ -105,11 +115,11 @@ export function ParentProfile() {
     }
   }
 
-  const handleDeleteChild = (childId) => {
+  const handleDeleteChild = (childId: string) => {
     setChildren(children.filter((child) => child.id !== childId))
   }
 
-  const handleMeetingResponse = (requestId, response) => {
+  const handleMeetingResponse = (requestId: string, response: "accept" | "decline") => {
     // In real app, this would update the database
     console.log(`Meeting request ${requestId} ${response}ed`)
   }
@@ -391,7 +401,7 @@ export function ParentProfile() {
               ))}
             </div>
           </div>
-        </TabsContent>
+  </TabsContent>
 
         <TabsContent value="meetings">
           <Card className="card-super-fun relative overflow-hidden">
@@ -441,13 +451,12 @@ export function ParentProfile() {
                           className="btn-primary-fun"
                         >
                           <Heart className="w-4 h-4 mr-2" />
-                          {t.common.accept}
+                          {t.common.approve}
                         </Button>
                         <Button
                           size="sm"
-                          variant="outline"
                           onClick={() => handleMeetingResponse(request.id, "decline")}
-                          className="btn-fun"
+                          className="btn-fun bg-white text-primary border border-primary hover:bg-gray-100"
                         >
                           {t.common.reject}
                         </Button>
@@ -507,10 +516,9 @@ export function ParentProfile() {
                       </div>
                     </div>
                     <Switch
-                      id={setting.key}
-                      checked={notificationSettings[setting.key]}
+                      checked={notificationSettings[setting.key as NotificationSettingKey]}
                       onCheckedChange={(checked) =>
-                        setNotificationSettings({ ...notificationSettings, [setting.key]: checked })
+                        setNotificationSettings({ ...notificationSettings, [setting.key as NotificationSettingKey]: checked })
                       }
                       disabled={setting.key === "emergencies"}
                       className="data-[state=checked]:bg-primary scale-125"
