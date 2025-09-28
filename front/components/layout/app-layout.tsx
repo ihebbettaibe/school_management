@@ -148,7 +148,7 @@ export function AppLayout({ children }: AppLayoutProps) {
         </aside>
 
         {/* Main content */}
-        <main className="flex-1 pb-20 md:pb-0 p-8 md:p-12 relative">
+  <main className="flex-1 pb-24 md:pb-0 p-4 sm:p-8 md:p-12 relative">
           {breadcrumbs.length > 1 && (
             <nav className="mb-8 p-4 bg-white/60 backdrop-blur-sm rounded-2xl border border-primary/10 shadow-lg">
               <div className="flex items-center space-x-2 text-sm font-medium">

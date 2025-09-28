@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Calendar, FileText, UserCheck, MessageSquare, Bell, TrendingUp, Star, Heart, Zap, Award } from "lucide-react"
 import Link from "next/link"
 import { useAuth } from "@/contexts/auth-context"
+import { useLanguage } from "@/contexts/language-context"
 
 // Mock data for parent dashboard
 const childrenData = [
@@ -54,6 +55,7 @@ const recentUpdates = [
 
 export default function ParentDashboard() {
   const { user } = useAuth()
+  const { t } = useLanguage();
 
   return (
     <ProtectedRoute allowedRoles={["parent"]}>
@@ -64,13 +66,13 @@ export default function ParentDashboard() {
             <div className="absolute bottom-4 left-4 text-xl animate-bounce-gentle">⭐</div>
             <div className="relative z-10">
               <h1 className="heading-super-fun text-transparent bg-clip-text bg-gradient-to-r from-primary via-accent to-secondary animate-slide-in-up">
-                Welcome back, {user?.name}! 👋
+                {t.homepage.title}, {user?.firstName}! 👋
               </h1>
               <p
                 className="text-super-playful text-muted-foreground animate-slide-in-up"
                 style={{ animationDelay: "0.2s" }}
               >
-                Here's what's happening with your amazing kids today! 🎓✨
+                {t.homepage.tagline}
               </p>
             </div>
           </div>

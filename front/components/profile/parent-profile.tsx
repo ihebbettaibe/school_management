@@ -64,7 +64,7 @@ export function ParentProfile() {
 
   const [parentData, setParentData] = useState({
     id: user?.id || "1",
-    name: user?.name || "Parent User",
+    name: `${user?.firstName || "Parent"} ${user?.lastName || "User"}`,
     email: user?.email || "parent@example.com",
     phone: user?.phone || "+1 (555) 123-4567",
     picture: "/parent-profile-photo.png",
@@ -107,7 +107,7 @@ export function ParentProfile() {
         id: Date.now().toString(),
         ...newChild,
         age: Number.parseInt(newChild.age),
-        picture: `/placeholder.svg?height=80&width=80&query=${newChild.gender.toLowerCase()} student`,
+  picture: `/logo.svg?height=80&width=80&query=${newChild.gender.toLowerCase()} student`,
       }
       setChildren([...children, child])
       setNewChild({ name: "", age: "", gender: "", year: "", class: "" })
@@ -126,13 +126,12 @@ export function ParentProfile() {
 
   return (
     <div className="relative">
-      <Tabs defaultValue="profile" className="space-y-8 relative z-10">
+      <Tabs defaultValue="profile" className="space-y-12 relative z-10">
   <div className="absolute w-full h-[68px] bg-gradient-to-r from-blue-200 to-purple-200 border-4 border-primary rounded-lg shadow-2xl" style={{top: '-15px', zIndex: 0}}></div>
-  <TabsList className="grid w-full grid-cols-4 items-center bg-transparent relative" style={{zIndex: 1}}>
-          {[
+  <TabsList className="grid w-full grid-cols-4 items-center bg-transparent relative mb-8" style={{zIndex: 1}}>
+          {[ 
             { value: "profile", icon: User, label: t.profile.parentInfo },
             { value: "children", icon: Users, label: t.profile.children },
-            { value: "meetings", icon: MessageSquare, label: t.profile.meetings },
             { value: "settings", icon: Settings, label: "Paramètres" },
           ].map((tab) => {
             const Icon = tab.icon
@@ -172,11 +171,11 @@ export function ParentProfile() {
               <div className="flex items-center space-x-6">
                 <div className="relative">
                   <Avatar className="w-24 h-24 ring-4 ring-primary/20 shadow-lg transition-all duration-300">
-                    <AvatarImage src={parentData.picture || "/placeholder.svg"} alt={parentData.name} />
+                    <AvatarImage src={parentData.picture || "/logo.svg"} alt={parentData.name} />
                     <AvatarFallback className="bg-gradient-to-br from-primary to-accent text-white text-2xl font-bold">
                       {parentData.name
                         .split(" ")
-                        .map((n) => n[0])
+                        .map((n: string) => n[0])
                         .join("")}
                     </AvatarFallback>
                   </Avatar>
@@ -236,8 +235,8 @@ export function ParentProfile() {
         </TabsContent>
 
         <TabsContent value="children">
-          <div className="space-y-8">
-            <div className="flex justify-between items-center">
+          <div className="space-y-12">
+            <div className="flex justify-between items-center mb-8">
               <h3 className="heading-super-fun flex items-center space-x-3">
                 <Users className="w-8 h-8 text-accent animate-pulse-fun" />
                 <span>Profils des enfants</span>
@@ -340,27 +339,27 @@ export function ParentProfile() {
               </Dialog>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {children.map((child) => (
-                <Card key={child.id} className="card-super-fun relative overflow-hidden group">
+              {children.map((child, idx) => (
+                <Card key={child.id} className="card-super-fun relative overflow-hidden group mb-8">
                   <div className="absolute top-0 right-0 w-16 h-16 bg-gradient-to-bl from-primary/20 to-transparent rounded-bl-3xl"></div>
                   <div className="absolute bottom-0 left-0 w-12 h-12 bg-gradient-to-tr from-accent/20 to-transparent rounded-tr-3xl"></div>
-                  <CardContent className="p-6">
-                    <div className="flex items-center justify-between mb-6">
-                      <div className="flex items-center space-x-4">
+                  <CardContent className="p-8">
+                    <div className="flex items-center justify-between mb-8">
+                      <div className="flex items-center space-x-6">
                         <div className="relative">
-                          <Avatar className="w-16 h-16 ring-4 ring-primary/20 shadow-lg group-hover:shadow-xl transition-all duration-300">
-                            <AvatarImage src={child.picture || "/placeholder.svg"} alt={child.name} />
-                            <AvatarFallback className="bg-gradient-to-br from-primary to-accent text-white text-lg font-bold">
+                          <Avatar className="w-20 h-20 ring-4 ring-primary/20 shadow-lg group-hover:shadow-xl transition-all duration-300">
+                            <AvatarImage src={child.picture || "/logo.svg"} alt={child.name} />
+                            <AvatarFallback className="bg-gradient-to-br from-primary to-accent text-white text-xl font-bold">
                               {child.name.split(" ").map((n) => n[0]).join("")}
                             </AvatarFallback>
                           </Avatar>
                         </div>
                         <div>
-                          <h4 className="text-xl font-bold text-primary font-sans">{child.name}</h4>
-                          <p className="text-base font-semibold text-primary/80 bg-primary/10 px-3 py-1 rounded-full mt-1 font-sans">{child.year} - {child.class}</p>
+                          <h4 className="text-2xl font-bold text-primary font-sans mb-2">{child.name}</h4>
+                          <p className="text-base font-semibold text-primary/80 bg-primary/10 px-4 py-2 rounded-full mt-1 font-sans">{child.year} - {child.class}</p>
                         </div>
                       </div>
-                      <div className="flex space-x-2">
+                      <div className="flex space-x-4">
                         <Button
                           variant="ghost"
                           size="sm"
@@ -379,7 +378,7 @@ export function ParentProfile() {
                         </Button>
                       </div>
                     </div>
-                    <div className="space-y-4">
+                    <div className="space-y-6">
                       {[
                         { label: t.children.age, value: `${child.age} ans` },
                         {
@@ -389,7 +388,7 @@ export function ParentProfile() {
                       ].map((info) => (
                         <div
                           key={info.label}
-                          className="flex justify-between items-center p-3 bg-gradient-to-r from-gray-50 to-blue-50 rounded-xl"
+                          className="flex justify-between items-center p-4 bg-gradient-to-r from-gray-50 to-blue-50 rounded-xl"
                         >
                           <span className="text-primary/70 font-semibold font-sans">{info.label}:</span>
                           <span className="text-lg font-semibold text-primary font-sans">{info.value}</span>
@@ -403,72 +402,7 @@ export function ParentProfile() {
           </div>
         </TabsContent>
 
-        <TabsContent value="meetings">
-          <Card className="card-super-fun relative overflow-hidden">
-            <div className="absolute top-4 right-4 text-2xl animate-bounce-gentle">💬</div>
-            <CardHeader>
-              <CardTitle className="heading-super-fun flex items-center space-x-3">
-                <MessageSquare className="w-8 h-8 text-primary animate-pulse-fun" />
-                <span>Demandes de réunion</span>
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-6">
-                {meetingRequests.map((request) => (
-                  <div
-                    key={request.id}
-                    className="p-6 bg-gradient-to-r from-gray-50 to-blue-50 rounded-2xl border-2 border-gray-200 hover:shadow-lg transition-all duration-300"
-                  >
-                    <div className="flex justify-between items-start mb-4">
-                      <div className="flex items-start space-x-4">
-                        <div className="text-3xl">👨‍🏫</div>
-                        <div>
-                          <h4 className="text-xl font-bold text-primary font-sans">{request.teacherName}</h4>
-                          <p className="text-lg font-semibold text-primary/80 font-sans">{request.subject}</p>
-                          <Badge
-                            variant={request.status === "pending" ? "default" : "secondary"}
-                            className="mt-2 text-sm font-bold px-3 py-1 rounded-full"
-                          >
-                            {request.status === "pending" ? "En attente" : "Acceptée"}
-                          </Badge>
-                        </div>
-                      </div>
-                      <div className="text-right">
-                        <p className="text-sm font-semibold text-primary/70 font-sans">Pour: {request.childName}</p>
-                        <p className="text-sm font-semibold text-primary/70 font-sans">Date: {request.requestedDate}</p>
-                      </div>
-                    </div>
-
-                    <div className="mb-4">
-                      <p className="text-base font-medium text-primary/80 font-sans">{request.reason}</p>
-                    </div>
-
-                    {request.status === "pending" && (
-                      <div className="flex space-x-4">
-                        <Button
-                          size="sm"
-                          onClick={() => handleMeetingResponse(request.id, "accept")}
-                          className="btn-primary-fun"
-                        >
-                          <Heart className="w-4 h-4 mr-2" />
-                          {t.common.approve}
-                        </Button>
-                        <Button
-                          size="sm"
-                          variant="outline"
-                          onClick={() => handleMeetingResponse(request.id, "decline")}
-                          className="btn-fun"
-                        >
-                          {t.common.reject}
-                        </Button>
-                      </div>
-                    )}
-                  </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-        </TabsContent>
+        {/* Meeting subsection removed as requested */}
 
         <TabsContent value="settings">
           <Card className="card-super-fun relative overflow-hidden">

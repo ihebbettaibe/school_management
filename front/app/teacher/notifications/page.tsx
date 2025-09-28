@@ -1,4 +1,5 @@
 import { AppLayout } from "@/components/layout/app-layout"
+import { useLanguage } from "@/contexts/language-context"
 import { NotificationCenter } from "@/components/notifications/notification-center"
 
 export default function TeacherNotificationsPage() {
@@ -50,15 +51,16 @@ export default function TeacherNotificationsPage() {
     }
   }
 
+  const { t } = useLanguage();
   return (
     <AppLayout>
-  <div className="px-2 py-4 sm:px-4 sm:py-8 md:p-16 space-y-8 sm:space-y-16 max-w-6xl mx-auto w-full">
+      <div className="px-2 py-4 sm:px-4 sm:py-8 md:p-16 space-y-8 sm:space-y-16 max-w-6xl mx-auto w-full">
         <div className="text-center space-y-4">
           <h1 className="text-6xl font-extrabold bg-gradient-to-r from-primary via-purple-600 to-blue-600 bg-clip-text text-transparent font-sans mb-4">
-            Notifications
+            {t.navigation.notifications}
           </h1>
           <p className="text-2xl text-muted-foreground font-semibold max-w-2xl mx-auto">
-            Manage your teaching notifications and alerts with ease
+            {t.homepage.notifications.description}
           </p>
         </div>
 

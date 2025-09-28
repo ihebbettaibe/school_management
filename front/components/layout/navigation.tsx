@@ -1,5 +1,6 @@
 "use client"
 
+import React from "react"
 import { usePathname } from "next/navigation"
 import Link from "next/link"
 import {
@@ -236,13 +237,40 @@ export function Navigation({ userType }: NavigationProps) {
     }
   }
 
+  const [open, setOpen] = React.useState(false)
   const navItems = getNavItems()
 
   return (
     <nav className="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-xl border-t-4 border-primary/20 shadow-2xl md:relative md:border-t-0 md:bg-transparent md:shadow-none z-50">
-      <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-8 h-1 bg-gradient-to-r from-primary to-accent rounded-full md:hidden"></div>
+      {/* Hamburger for mobile */}
+      <button
+        className="md:hidden absolute top-2 right-4 z-[101] p-2 rounded-lg bg-white border shadow-lg"
+        onClick={() => setOpen((prev) => !prev)}
+        aria-label="Toggle navigation"
+      >
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-8 h-8 text-primary">
+          <line x1="3" y1="12" x2="21" y2="12" />
+          <line x1="3" y1="6" x2="21" y2="6" />
+          <line x1="3" y1="18" x2="21" y2="18" />
+        </svg>
+      </button>
 
-      <div className="flex justify-around md:flex-col md:space-y-2 md:p-6 py-2">
+      {/* Backdrop overlay when menu is open on mobile */}
+      {open && (
+        <div
+          className="fixed inset-0 bg-black/30 backdrop-blur-sm z-[100] md:hidden"
+          onClick={() => setOpen(false)}
+        />
+      )}
+
+      {/* Navigation bar: overlays content on mobile when open, always visible on desktop */}
+      <div
+        className={cn(
+          "fixed bottom-0 left-0 right-0 flex justify-around py-2 transition-all duration-300 z-[101] md:static md:flex-col md:space-y-2 md:p-6 md:z-auto",
+          open ? "flex" : "hidden",
+          "md:flex"
+        )}
+      >
         {navItems.map((item, index) => {
           const Icon = item.icon
           const isActive = pathname === item.href
@@ -260,6 +288,7 @@ export function Navigation({ userType }: NavigationProps) {
                 animationDelay: `${index * 0.1}s`,
               }}
               title={item.description}
+              onClick={() => setOpen(false)}
             >
               <div className="relative">
                 <div
