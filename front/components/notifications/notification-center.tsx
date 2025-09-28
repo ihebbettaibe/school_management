@@ -384,22 +384,26 @@ export function NotificationCenter({ userType }: NotificationCenterProps) {
                     </div>
 
                     {request.status === "pending" && (
-                      <div className="flex space-x-4">
+                      <div className="flex gap-2 pt-2">
                         <Button
                           size="sm"
                           onClick={() => handleMeetingResponse(request.id, "accept")}
-                          className="btn-primary-fun"
+                          className="bg-green-50 hover:bg-green-100 text-green-600 font-bold rounded border border-green-100"
                         >
-                          <Heart className="w-4 h-4 mr-2" />
-                          {t.common.approve}
+                          ✅ {t.common.approve}
                         </Button>
                         <Button
                           size="sm"
-                          variant="outline"
                           onClick={() => handleMeetingResponse(request.id, "decline")}
-                          className="btn-fun"
+                          className="bg-red-50 hover:bg-red-100 text-red-600 font-bold rounded border border-red-100"
                         >
-                          {t.common.reject}
+                          ❌ {t.common.reject}
+                        </Button>
+                        <Button
+                          size="sm"
+                          className="bg-blue-50 hover:bg-blue-100 text-blue-600 font-bold rounded border border-blue-100"
+                        >
+                          💬 Message
                         </Button>
                       </div>
                     )}

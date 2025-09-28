@@ -352,7 +352,7 @@ export function SchoolFeed({ userType }: SchoolFeedProps) {
         {post.image && (
           <div className="rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 group-hover:scale-105">
             <img
-              src={post.image || "/placeholder.svg"}
+              src={post.image || "/logo.svg"}
               alt="Post image"
               className="w-full h-64 object-cover hover:scale-110 transition-transform duration-500"
             />

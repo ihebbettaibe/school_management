@@ -1,20 +1,24 @@
 "use client"
 
 import { cn } from "@/lib/utils"
-
-import type React from "react"
+import type { ReactNode } from "react"
 import { useEffect } from "react"
 import { useRouter, usePathname } from "next/navigation"
+import Link from "next/link"
+
 import { Navigation } from "./navigation"
 import { LanguageSwitcher } from "@/components/ui/language-switcher"
 import { useLanguage } from "@/contexts/language-context"
 import { useAuth } from "@/contexts/auth-context"
 import { Button } from "@/components/ui/button"
-import { LogOut, BookOpen, Star, Heart, Sparkles, Home, ChevronRight } from "lucide-react"
-import Link from "next/link"
+import {
+  LogOut,
+  Home,
+  ChevronRight,
+} from "lucide-react"
 
 interface AppLayoutProps {
-  children: React.ReactNode
+  children: ReactNode
 }
 
 const generateBreadcrumbs = (pathname: string, t: any) => {
@@ -28,8 +32,7 @@ const generateBreadcrumbs = (pathname: string, t: any) => {
     segments.forEach((segment, index) => {
       currentPath += `/${segment}`
 
-      let label = segment
-      // Map common segments to French labels
+      let label: string
       switch (segment) {
         case "parent":
           label = "Parent"
@@ -96,7 +99,6 @@ export function AppLayout({ children }: AppLayoutProps) {
   useEffect(() => {
     if (!isLoading && !user) {
       router.push("/")
-      return
     }
   }, [user, isLoading, router])
 
@@ -104,7 +106,7 @@ export function AppLayout({ children }: AppLayoutProps) {
     return (
       <div className="flex flex-col items-center justify-center min-h-screen fun-gradient-bg">
         <div className="relative">
-          <div className="rounded-full h-16 w-16 border-4 border-primary/20 border-t-primary shadow-lg"></div>
+          <div className="rounded-full h-16 w-16 border-4 border-primary/20 border-t-primary shadow-lg animate-spin"></div>
         </div>
         <p className="mt-6 text-playful text-primary font-bold">
           Chargement de votre application scolaire...
@@ -113,41 +115,23 @@ export function AppLayout({ children }: AppLayoutProps) {
     )
   }
 
-  if (!user) {
-    return null
-  }
+  if (!user) return null
 
   return (
-    <div className={`min-h-screen fun-gradient-bg bubble-pattern relative ${isRTL ? "rtl" : "ltr"}`}>
+    <div className={cn("min-h-screen fun-gradient-bg bubble-pattern relative", isRTL ? "rtl" : "ltr")}>
       <div className="flex flex-col md:flex-row relative z-10">
+        {/* Sidebar */}
         <aside className="md:w-72 backdrop-blur-md bg-white/95 border-r-4 border-primary/20 shadow-2xl relative">
           <div className="absolute top-0 right-0 w-8 h-8 bg-gradient-to-br from-primary/20 to-accent/20 rounded-bl-2xl"></div>
           <div className="absolute bottom-0 left-0 w-6 h-6 bg-gradient-to-tr from-secondary/20 to-primary/20 rounded-tr-2xl"></div>
 
           <div className="md:p-8 md:border-b-2 md:border-primary/10 flex justify-between items-center relative">
-            <Link
-              href="/"
-              className="hidden md:flex items-center space-x-4 group relative"
-            >
-              <div className="relative">
-                <div className="w-12 h-12 bg-gradient-to-br from-primary via-accent to-secondary rounded-2xl flex items-center justify-center shadow-xl">
-                  <BookOpen className="w-7 h-7 text-white" />
-                </div>
-              </div>
-              <div className="relative">
-                <h1 className="text-2xl font-black bg-gradient-to-r from-primary via-accent to-secondary bg-clip-text text-transparent">
-                  DiLo Connect
-                </h1>
-                <div className="text-xs font-bold text-primary/60 mt-1">
-                  Apprentissage Amusant Ensemble
-                </div>
-              </div>
+            <Link href="/" className="hidden md:flex items-center group relative">
+              <img src="/logo.svg" alt="Logo" className="w-20 h-20" />
             </Link>
 
             <div className="hidden md:flex items-center space-x-4">
-              <div className="relative">
-                <LanguageSwitcher />
-              </div>
+              <LanguageSwitcher />
               <Button
                 variant="ghost"
                 size="sm"
@@ -159,9 +143,11 @@ export function AppLayout({ children }: AppLayoutProps) {
               </Button>
             </div>
           </div>
+
           <Navigation userType={user.userType} />
         </aside>
 
+        {/* Main content */}
         <main className="flex-1 pb-20 md:pb-0 p-8 md:p-12 relative">
           {breadcrumbs.length > 1 && (
             <nav className="mb-8 p-4 bg-white/60 backdrop-blur-sm rounded-2xl border border-primary/10 shadow-lg">
@@ -169,9 +155,15 @@ export function AppLayout({ children }: AppLayoutProps) {
                 <Home className="w-4 h-4 text-primary/60" />
                 {breadcrumbs.map((crumb, index) => (
                   <div key={crumb.href} className="flex items-center space-x-2">
-                    {index > 0 && <ChevronRight className={cn("w-4 h-4 text-primary/40", isRTL && "rotate-180")} />}
+                    {index > 0 && (
+                      <ChevronRight
+                        className={cn("w-4 h-4 text-primary/40", isRTL && "rotate-180")}
+                      />
+                    )}
                     {crumb.isLast ? (
-                      <span className="text-primary font-bold bg-primary/10 px-3 py-1 rounded-lg">{crumb.label}</span>
+                      <span className="text-primary font-bold bg-primary/10 px-3 py-1 rounded-lg">
+                        {crumb.label}
+                      </span>
                     ) : (
                       <Link
                         href={crumb.href}

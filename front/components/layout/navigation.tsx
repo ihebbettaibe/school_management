@@ -129,14 +129,14 @@ export function Navigation({ userType }: NavigationProps) {
             emoji: "👥",
             description: "Gestion des élèves et présence",
           },
-          {
-            href: "/teacher/feed",
-            label: t.navigation.schoolFeed,
-            icon: MessageSquare,
-            color: "from-teal-500 to-teal-600",
-            emoji: "💬",
-            description: "Communications avec les parents",
-          },
+          // {
+          //   href: "/teacher/feed",
+          //   label: t.navigation.schoolFeed,
+          //   icon: MessageSquare,
+          //   color: "from-teal-500 to-teal-600",
+          //   emoji: "💬",
+          //   description: "Communications avec les parents",
+          // },
           {
             href: "/teacher/notifications",
             label: t.navigation.notifications,
@@ -153,14 +153,6 @@ export function Navigation({ userType }: NavigationProps) {
             color: "from-yellow-500 to-yellow-600",
             emoji: "📊",
             description: "Performances des élèves",
-          },
-          {
-            href: "/teacher/recommendations",
-            label: t.navigation.suggestions,
-            icon: Lightbulb,
-            color: "from-indigo-500 to-indigo-600",
-            emoji: "💡",
-            description: "Suggestions pédagogiques",
           },
           {
             href: "/teacher/profile",
@@ -254,7 +246,6 @@ export function Navigation({ userType }: NavigationProps) {
         {navItems.map((item, index) => {
           const Icon = item.icon
           const isActive = pathname === item.href
-
           return (
             <Link
               key={item.href}
@@ -268,7 +259,7 @@ export function Navigation({ userType }: NavigationProps) {
               style={{
                 animationDelay: `${index * 0.1}s`,
               }}
-              title={item.description} // Added tooltip descriptions
+              title={item.description}
             >
               <div className="relative">
                 <div
@@ -332,6 +323,10 @@ export function Navigation({ userType }: NavigationProps) {
             </Link>
           )
         })}
+        {/* Logo at the end of the navbar */}
+        <div className="flex flex-col items-center justify-center p-4 md:p-4">
+          <img src="/logo.svg" alt="Logo" className="w-20 h-20 md:w-28 md:h-28" />
+        </div>
       </div>
 
       <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-accent to-secondary md:hidden"></div>

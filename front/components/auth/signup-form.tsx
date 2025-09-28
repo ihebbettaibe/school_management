@@ -14,7 +14,8 @@ import Link from "next/link"
 
 export function SignupForm() {
   const [formData, setFormData] = useState({
-    name: "",
+    firstName: "",
+    lastName: "",
     email: "",
     password: "",
     confirmPassword: "",
@@ -37,8 +38,11 @@ export function SignupForm() {
   const validateForm = () => {
     const newErrors: Record<string, string> = {}
 
-    if (!formData.name.trim()) {
-      newErrors.name = "Le nom complet est requis"
+    if (!formData.firstName.trim()) {
+      newErrors.firstName = "Le prénom est requis"
+    }
+    if (!formData.lastName.trim()) {
+      newErrors.lastName = "Le nom de famille est requis"
     }
 
     if (!formData.email.trim()) {
@@ -65,7 +69,7 @@ export function SignupForm() {
       newErrors.phone = "Le numéro de téléphone est requis"
     }
 
-    if (formData.userType !== "admin" && !formData.schoolCode.trim()) {
+    if (!formData.schoolCode.trim()) {
       newErrors.schoolCode = "Le code de l'école est requis"
     }
 
@@ -81,7 +85,8 @@ export function SignupForm() {
     }
 
     const success = await signup({
-      name: formData.name,
+      firstName: formData.firstName,
+      lastName: formData.lastName,
       email: formData.email,
       phone: formData.phone,
       userType: formData.userType as UserType,
@@ -102,9 +107,7 @@ export function SignupForm() {
 
       <CardHeader className="text-center pb-6 relative">
         <div className="flex justify-center mb-4">
-          <div className="w-16 h-16 bg-gradient-to-br from-primary to-accent rounded-3xl flex items-center justify-center shadow-xl">
-            <Star className="w-8 h-8 text-white" />
-          </div>
+          <img src="/logo.svg" alt="Logo" className="w-20 h-20" />
         </div>
         <CardTitle className="text-4xl font-extrabold text-primary font-sans mb-2">
           {t.auth.createAccount}
@@ -115,28 +118,54 @@ export function SignupForm() {
       <CardContent className="relative z-10">
         <form onSubmit={handleSignup} className="space-y-6">
           <div className="space-y-3">
-            <Label htmlFor="name" className="text-lg font-bold text-foreground flex items-center space-x-2">
+            <Label htmlFor="firstName" className="text-lg font-bold text-foreground flex items-center space-x-2">
               <User className="w-5 h-5 text-primary" />
-              <span>{t.auth.fullName}</span>
+              <span>Prénom</span>
             </Label>
             <div className="relative">
               <Input
-                id="name"
-                value={formData.name}
-                onChange={(e) => handleInputChange("name", e.target.value)}
-                placeholder="Entrez votre nom complet"
+                id="firstName"
+                value={formData.firstName}
+                onChange={(e) => handleInputChange("firstName", e.target.value)}
+                placeholder="Entrez votre prénom"
                 className={`h-14 text-lg pl-12 border-2 rounded-2xl transition-all duration-300 hover:shadow-lg bg-gradient-to-r from-white to-blue-50 ${
-                  errors.name
+                  errors.firstName
                     ? "border-red-300 focus:border-red-500"
                     : "border-primary/20 focus:border-primary focus:ring-primary/20"
                 }`}
               />
               <User className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-primary/60" />
             </div>
-            {errors.name && (
+            {errors.firstName && (
               <div className="flex items-center space-x-2 text-red-600">
                 <AlertCircle className="w-4 h-4" />
-                <p className="text-sm font-bold">{errors.name}</p>
+                <p className="text-sm font-bold">{errors.firstName}</p>
+              </div>
+            )}
+          </div>
+          <div className="space-y-3">
+            <Label htmlFor="lastName" className="text-lg font-bold text-foreground flex items-center space-x-2">
+              <User className="w-5 h-5 text-primary" />
+              <span>Nom de famille</span>
+            </Label>
+            <div className="relative">
+              <Input
+                id="lastName"
+                value={formData.lastName}
+                onChange={(e) => handleInputChange("lastName", e.target.value)}
+                placeholder="Entrez votre nom de famille"
+                className={`h-14 text-lg pl-12 border-2 rounded-2xl transition-all duration-300 hover:shadow-lg bg-gradient-to-r from-white to-blue-50 ${
+                  errors.lastName
+                    ? "border-red-300 focus:border-red-500"
+                    : "border-primary/20 focus:border-primary focus:ring-primary/20"
+                }`}
+              />
+              <User className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-primary/60" />
+            </div>
+            {errors.lastName && (
+              <div className="flex items-center space-x-2 text-red-600">
+                <AlertCircle className="w-4 h-4" />
+                <p className="text-sm font-bold">{errors.lastName}</p>
               </div>
             )}
           </div>
@@ -230,34 +259,32 @@ export function SignupForm() {
             )}
           </div>
 
-          {formData.userType && formData.userType !== "admin" && (
-            <div className="space-y-3">
-              <Label htmlFor="schoolCode" className="text-lg font-bold text-foreground flex items-center space-x-2">
-                <School className="w-5 h-5 text-primary" />
-                <span>{t.auth.schoolCode}</span>
-              </Label>
-              <div className="relative">
-                <Input
-                  id="schoolCode"
-                  value={formData.schoolCode}
-                  onChange={(e) => handleInputChange("schoolCode", e.target.value)}
-                  placeholder="Entrez le code de votre école"
-                  className={`h-14 text-lg pl-12 border-2 rounded-2xl transition-all duration-300 hover:shadow-lg bg-gradient-to-r from-white to-blue-50 ${
-                    errors.schoolCode
-                      ? "border-red-300 focus:border-red-500"
-                      : "border-primary/20 focus:border-primary focus:ring-primary/20"
-                  }`}
-                />
-                <School className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-primary/60" />
-              </div>
-              {errors.schoolCode && (
-                <div className="flex items-center space-x-2 text-red-600">
-                  <AlertCircle className="w-4 h-4" />
-                  <p className="text-sm font-bold">{errors.schoolCode}</p>
-                </div>
-              )}
+          <div className="space-y-3">
+            <Label htmlFor="schoolCode" className="text-lg font-bold text-foreground flex items-center space-x-2">
+              <School className="w-5 h-5 text-primary" />
+              <span>{t.auth.schoolCode}</span>
+            </Label>
+            <div className="relative">
+              <Input
+                id="schoolCode"
+                value={formData.schoolCode}
+                onChange={(e) => handleInputChange("schoolCode", e.target.value)}
+                placeholder="Entrez le code de votre école"
+                className={`h-14 text-lg pl-12 border-2 rounded-2xl transition-all duration-300 hover:shadow-lg bg-gradient-to-r from-white to-blue-50 ${
+                  errors.schoolCode
+                    ? "border-red-300 focus:border-red-500"
+                    : "border-primary/20 focus:border-primary focus:ring-primary/20"
+                }`}
+              />
+              <School className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-primary/60" />
             </div>
-          )}
+            {errors.schoolCode && (
+              <div className="flex items-center space-x-2 text-red-600">
+                <AlertCircle className="w-4 h-4" />
+                <p className="text-sm font-bold">{errors.schoolCode}</p>
+              </div>
+            )}
+          </div>
 
           <div className="space-y-3">
             <Label htmlFor="password" className="text-lg font-bold text-foreground flex items-center space-x-2">

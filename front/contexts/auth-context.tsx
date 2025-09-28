@@ -9,7 +9,8 @@ export type UserType = "parent" | "teacher" | "admin"
 export interface User {
   id: string
   email: string
-  name: string
+  firstName: string
+  lastName: string
   phone?: string
   userType: UserType
   schoolCode?: string
@@ -37,17 +38,19 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       try {
         const storedUserType = localStorage.getItem("userType") as UserType | null
         const storedUserEmail = localStorage.getItem("userEmail")
-        const storedUserName = localStorage.getItem("userName")
+          const storedUserFirstName = localStorage.getItem("userFirstName")
+          const storedUserLastName = localStorage.getItem("userLastName")
         const storedUserPhone = localStorage.getItem("userPhone")
 
-        if (storedUserType && storedUserEmail) {
-          setUser({
-            id: `user_${Date.now()}`, // Mock ID
-            email: storedUserEmail,
-            name: storedUserName || "User",
-            phone: storedUserPhone || undefined,
-            userType: storedUserType,
-          })
+          if (storedUserType && storedUserEmail) {
+            setUser({
+              id: `user_${Date.now()}`,
+              email: storedUserEmail,
+              firstName: storedUserFirstName || "User",
+              lastName: storedUserLastName || "",
+              phone: storedUserPhone || undefined,
+              userType: storedUserType,
+            })
         }
       } catch (error) {
         console.error("Error checking auth:", error)
@@ -67,17 +70,21 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       await new Promise((resolve) => setTimeout(resolve, 1000))
 
       // Mock user data
+      const firstName = email.split("@")[0]
+      const lastName = ""
       const userData: User = {
         id: `user_${Date.now()}`,
         email,
-        name: email.split("@")[0], // Use email prefix as name
+        firstName,
+        lastName,
         userType,
       }
 
       // Store in localStorage
       localStorage.setItem("userType", userType)
       localStorage.setItem("userEmail", email)
-      localStorage.setItem("userName", userData.name)
+      localStorage.setItem("userFirstName", firstName)
+      localStorage.setItem("userLastName", lastName)
 
       setUser(userData)
 
@@ -115,7 +122,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       const newUser: User = {
         id: `user_${Date.now()}`,
         email: userData.email,
-        name: userData.name,
+        firstName: userData.firstName,
+        lastName: userData.lastName,
         phone: userData.phone,
         userType: userData.userType,
         schoolCode: userData.schoolCode,
@@ -124,7 +132,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       // Store in localStorage
       localStorage.setItem("userType", userData.userType)
       localStorage.setItem("userEmail", userData.email)
-      localStorage.setItem("userName", userData.name)
+      localStorage.setItem("userFirstName", userData.firstName)
+      localStorage.setItem("userLastName", userData.lastName)
       if (userData.phone) localStorage.setItem("userPhone", userData.phone)
 
       setUser(newUser)
@@ -153,10 +162,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const logout = () => {
     // Clear localStorage
-    localStorage.removeItem("userType")
-    localStorage.removeItem("userEmail")
-    localStorage.removeItem("userName")
-    localStorage.removeItem("userPhone")
+  localStorage.removeItem("userType")
+  localStorage.removeItem("userEmail")
+  localStorage.removeItem("userFirstName")
+  localStorage.removeItem("userLastName")
+  localStorage.removeItem("userPhone")
 
     setUser(null)
     router.push("/")

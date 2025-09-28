@@ -27,7 +27,6 @@ export function MeetingRequestModal({ onClose }: MeetingRequestModalProps) {
     studentId: "",
     preferredDate: "",
     reason: "",
-    notes: "",
   })
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -37,10 +36,8 @@ export function MeetingRequestModal({ onClose }: MeetingRequestModalProps) {
       // Mock function - in real app, this would send the request
       console.log("Meeting request sent:", {
         student: student.name,
-        parent: student.parentName,
         date: formData.preferredDate,
         reason: formData.reason,
-        notes: formData.notes,
       })
       onClose()
     }
@@ -52,14 +49,13 @@ export function MeetingRequestModal({ onClose }: MeetingRequestModalProps) {
 
   return (
     <Dialog open={true} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-2xl">
+      <DialogContent className="max-w-md">
         <DialogHeader>
-          <DialogTitle>Request Parent Meeting</DialogTitle>
+          <DialogTitle>Request Meeting</DialogTitle>
         </DialogHeader>
-
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="space-y-2">
-            <Label htmlFor="student">Select Student</Label>
+        <form onSubmit={handleSubmit} className="space-y-3">
+          <div>
+            <Label htmlFor="student">Student</Label>
             <Select value={formData.studentId} onValueChange={(value) => handleInputChange("studentId", value)}>
               <SelectTrigger>
                 <SelectValue placeholder="Choose a student" />
@@ -67,20 +63,14 @@ export function MeetingRequestModal({ onClose }: MeetingRequestModalProps) {
               <SelectContent>
                 {mockStudents.map((student) => (
                   <SelectItem key={student.id} value={student.id}>
-                    <div className="flex flex-col">
-                      <span className="font-medium">{student.name}</span>
-                      <span className="text-xs text-muted-foreground">
-                        {student.class} - Parent: {student.parentName}
-                      </span>
-                    </div>
+                    {student.name}
                   </SelectItem>
                 ))}
               </SelectContent>
             </Select>
           </div>
-
-          <div className="space-y-2">
-            <Label htmlFor="date">Preferred Date</Label>
+          <div>
+            <Label htmlFor="date">Date</Label>
             <Input
               id="date"
               type="date"
@@ -89,37 +79,24 @@ export function MeetingRequestModal({ onClose }: MeetingRequestModalProps) {
               required
             />
           </div>
-
-          <div className="space-y-2">
-            <Label htmlFor="reason">Reason for Meeting</Label>
+          <div>
+            <Label htmlFor="reason">Reason</Label>
             <Textarea
               id="reason"
               value={formData.reason}
               onChange={(e) => handleInputChange("reason", e.target.value)}
-              placeholder="Describe the purpose of this meeting..."
-              rows={3}
+              placeholder="Purpose of meeting..."
+              rows={2}
               required
             />
           </div>
-
-          <div className="space-y-2">
-            <Label htmlFor="notes">Additional Notes (Optional)</Label>
-            <Textarea
-              id="notes"
-              value={formData.notes}
-              onChange={(e) => handleInputChange("notes", e.target.value)}
-              placeholder="Any additional information for the parent..."
-              rows={2}
-            />
-          </div>
-
-          <div className="flex space-x-2 pt-4">
+          <div className="flex space-x-2 pt-2">
             <Button type="button" variant="outline" onClick={onClose} className="flex-1 bg-transparent">
               Cancel
             </Button>
             <Button type="submit" className="flex-1">
               <Send className="w-4 h-4 mr-2" />
-              Send Request
+              Send
             </Button>
           </div>
         </form>

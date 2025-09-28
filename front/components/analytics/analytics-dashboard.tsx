@@ -118,7 +118,7 @@ export function AnalyticsDashboard({ userType }: AnalyticsDashboardProps) {
   }
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 w-full">
       {/* Simplified Filters */}
       <Card>
         <CardHeader>
@@ -183,7 +183,7 @@ export function AnalyticsDashboard({ userType }: AnalyticsDashboardProps) {
       </Card>
 
 
-      <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
+  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-8 w-full">
         {/* Grade Distribution Chart */}
         <Card>
           <CardHeader>
@@ -197,7 +197,7 @@ export function AnalyticsDashboard({ userType }: AnalyticsDashboardProps) {
               config={{
                 count: { label: "Étudiants", color: CHART_COLORS.primary },
               }}
-              className="h-80"
+              className="min-h-[220px] sm:min-h-[320px] md:min-h-[400px]"
             >
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
@@ -253,7 +253,7 @@ export function AnalyticsDashboard({ userType }: AnalyticsDashboardProps) {
               currentTerm: { label: "Trimestre Actuel", color: CHART_COLORS.primary },
               lastTerm: { label: "Dernier Trimestre", color: CHART_COLORS.secondary },
             }}
-            className="h-96"
+            className="min-h-[220px] sm:min-h-[320px] md:min-h-[400px]"
           >
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={subjectComparisonData} margin={{ top: 20, right: 30, left: 20, bottom: 20 }}>
@@ -304,7 +304,7 @@ export function AnalyticsDashboard({ userType }: AnalyticsDashboardProps) {
               grade4: { label: "CM1", color: CHART_COLORS.secondary },
               grade5: { label: "CM2", color: CHART_COLORS.accent },
             }}
-            className="h-80"
+            className="min-h-[220px] sm:min-h-[320px] md:min-h-[400px]"
           >
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={performanceTrendData} margin={{ top: 20, right: 30, left: 20, bottom: 20 }}>
@@ -404,11 +404,11 @@ export function AnalyticsDashboard({ userType }: AnalyticsDashboardProps) {
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="space-y-4">
+          <div className="space-y-4 w-full">
             {mockClassLeaderboard.map((classData) => (
               <div
                 key={classData.class}
-                className="flex items-center justify-between p-6 border border-border rounded-xl bg-card hover:bg-muted/30 transition-colors"
+                className="flex flex-col sm:flex-row items-center justify-between p-4 sm:p-6 border border-border rounded-xl bg-card hover:bg-muted/30 transition-colors w-full"
               >
                 <div className="flex items-center gap-4">
                   {getRankIcon(classData.rank)}

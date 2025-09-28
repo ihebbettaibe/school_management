@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import React, { useState } from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { ScheduleBlock } from "./schedule-block"
 import { ScheduleDetailModal } from "./schedule-detail-modal"
@@ -107,7 +107,7 @@ export function WeeklySchedule({ userType }: WeeklyScheduleProps) {
 
             {/* Schedule grid */}
             {timeSlots.map((time) => (
-              <>
+              <React.Fragment key={time}>
                 <div
                   key={`time-${time}`}
                   className="text-xl text-gray-700 text-center p-6 border-r border-gray-200 bg-white font-bold"
@@ -126,7 +126,7 @@ export function WeeklySchedule({ userType }: WeeklyScheduleProps) {
                     </div>
                   )
                 })}
-              </>
+              </React.Fragment>
             ))}
           </div>
         </CardContent>

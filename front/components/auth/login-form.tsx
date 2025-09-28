@@ -42,9 +42,7 @@ export function LoginForm() {
 
       <CardHeader className="text-center pb-6 relative">
         <div className="flex justify-center mb-4">
-          <div className="w-16 h-16 bg-gradient-to-br from-primary to-accent rounded-3xl flex items-center justify-center shadow-xl">
-            <Heart className="w-8 h-8 text-white" />
-          </div>
+          <img src="/logo.svg" alt="Logo" className="w-20 h-20" />
         </div>
         <CardTitle className="text-4xl font-extrabold text-primary font-sans mb-2">
           {t.auth.welcomeBack}

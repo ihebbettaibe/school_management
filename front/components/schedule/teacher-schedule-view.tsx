@@ -198,14 +198,14 @@ export function TeacherScheduleView() {
     <>
       <Card>
         <CardHeader>
-          <div className="flex items-center justify-between">
-            <CardTitle className="flex items-center space-x-4 text-3xl font-extrabold text-primary">
-              <Calendar className="w-8 h-8" />
-              <span className="text-3xl font-extrabold font-sans">Emploi du temps hebdomadaire</span>
+          <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+            <CardTitle className="flex items-center gap-2 md:gap-4 text-lg md:text-3xl font-extrabold text-primary">
+              <Calendar className="w-6 h-6 md:w-8 md:h-8" />
+              <span className="text-lg md:text-3xl font-extrabold font-sans">Emploi du temps hebdomadaire</span>
             </CardTitle>
-            <div className="flex items-center space-x-4">
+            <div className="flex flex-col gap-2 md:flex-row md:items-center md:space-x-4">
               <Select value={selectedClass} onValueChange={setSelectedClass}>
-                <SelectTrigger className="w-48">
+                <SelectTrigger className="w-full md:w-48">
                   <SelectValue placeholder="Sélectionner une classe" />
                 </SelectTrigger>
                 <SelectContent>
@@ -219,7 +219,7 @@ export function TeacherScheduleView() {
               <Button
                 onClick={handleAddExamClick}
                 disabled={isAddingExam}
-                className={`transition-all duration-200 ${
+                className={`transition-all duration-200 w-full md:w-auto ${
                   isAddingExam
                     ? "bg-green-500 hover:bg-green-500 text-white shadow-lg animate-pulse"
                     : "bg-green-600 hover:bg-green-700 text-white hover:shadow-md"
@@ -241,7 +241,7 @@ export function TeacherScheduleView() {
                 <Button
                   onClick={handleCancelExam}
                   variant="outline"
-                  className="border-red-200 text-red-600 hover:bg-red-50 bg-transparent"
+                  className="border-red-200 text-red-600 hover:bg-red-50 bg-transparent w-full md:w-auto"
                 >
                   <X className="w-4 h-4 mr-2" />
                   Annuler
@@ -250,22 +250,22 @@ export function TeacherScheduleView() {
             </div>
           </div>
           {isAddingExam && (
-            <div className="mt-4 p-3 bg-green-50 border border-green-200 rounded-lg">
+            <div className="mt-2 md:mt-4 p-2 md:p-3 bg-green-50 border border-green-200 rounded-lg">
               <div className="flex items-center gap-2 text-green-800">
                 <Check className="w-4 h-4" />
-                <span className="text-sm font-medium">
+                <span className="text-xs md:text-sm font-medium">
                   Mode ajout d'examen activé - Cliquez sur un créneau libre pour programmer un examen
                 </span>
               </div>
             </div>
           )}
         </CardHeader>
-        <CardContent className="p-6">
-          <div className="grid grid-cols-6 gap-4">
+        <CardContent className="p-2 md:p-6 w-full overflow-x-auto">
+          <div className="min-w-[600px] md:min-w-0 grid grid-cols-6 gap-2 md:gap-4">
             {/* Header row */}
-            <div className="font-extrabold text-center p-4 text-xl text-primary bg-gray-50 border-b border-primary/20 tracking-wide rounded-t-lg">Heure</div>
+            <div className="font-extrabold text-center p-2 md:p-4 text-base md:text-xl text-primary bg-gray-50 border-b border-primary/20 tracking-wide rounded-t-lg">Heure</div>
             {days.map((day) => (
-              <div key={day} className="font-extrabold text-center p-4 text-xl text-primary bg-gray-50 border-b border-primary/20 tracking-wide rounded-t-lg">
+              <div key={day} className="font-extrabold text-center p-2 md:p-4 text-base md:text-xl text-primary bg-gray-50 border-b border-primary/20 tracking-wide rounded-t-lg">
                 {day === "Monday"
                   ? "Lun"
                   : day === "Tuesday"
@@ -283,7 +283,7 @@ export function TeacherScheduleView() {
               <>
                 <div
                   key={`time-${time}`}
-                  className="text-xl text-primary text-center p-4 border-r border-primary/10 bg-white font-bold"
+                  className="text-base md:text-xl text-primary text-center p-2 md:p-4 border-r border-primary/10 bg-white font-bold"
                 >
                   {time}
                 </div>
@@ -295,7 +295,7 @@ export function TeacherScheduleView() {
                   return (
                     <div
                       key={`${day}-${time}`}
-                      className="p-2"
+                      className="p-1 md:p-2"
                       onClick={() => examCursor && handleSlotClick(day, time)}
                       onMouseEnter={() => examCursor && setHoveredSlot({ day, time })}
                       onMouseLeave={() => examCursor && setHoveredSlot(null)}
@@ -312,7 +312,7 @@ export function TeacherScheduleView() {
                         />
                       ) : (
                         <div
-                          className={`h-16 border border-dashed border-border rounded-lg transition-all duration-200 ${
+                          className={`h-12 md:h-16 border border-dashed border-border rounded-lg transition-all duration-200 ${
                             examCursor && !hasExistingExam
                               ? "cursor-pointer hover:bg-green-50 hover:border-green-300 hover:shadow-md transform hover:scale-105"
                               : ""

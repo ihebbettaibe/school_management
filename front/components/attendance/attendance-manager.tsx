@@ -87,17 +87,17 @@ export function AttendanceManager({ userType }: AttendanceManagerProps) {
   const stats = getAttendanceStats()
 
   return (
-    <div className="space-y-6">
+  <div className="space-y-6 w-full">
       {/* Controls */}
       <Card>
         <CardHeader>
-          <CardTitle className="flex items-center space-x-2">
+          <CardTitle className="flex items-center gap-2 text-base md:text-xl">
             <Calendar className="h-5 w-5" />
             <span>Attendance for Today</span>
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
             <div className="space-y-2">
               <label className="text-sm font-medium">Class</label>
               <Select value={selectedClass} onValueChange={setSelectedClass}>
@@ -123,8 +123,8 @@ export function AttendanceManager({ userType }: AttendanceManagerProps) {
               />
             </div>
 
-            <div className="flex items-end space-x-2">
-              <Button variant="outline" onClick={markAllPresent} className="flex-1 bg-transparent">
+            <div className="flex items-end">
+              <Button variant="outline" onClick={markAllPresent} className="w-full md:w-auto bg-transparent">
                 Mark All Present
               </Button>
             </div>
@@ -132,8 +132,8 @@ export function AttendanceManager({ userType }: AttendanceManagerProps) {
         </CardContent>
       </Card>
 
-      {/* Statistics */}
-      <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+  {/* Statistics */}
+  <div className="grid grid-cols-2 gap-2 md:grid-cols-5 md:gap-4">
         <Card>
           <CardContent className="p-4 text-center">
             <div className="text-2xl font-bold text-green-600">{stats.present}</div>
@@ -168,9 +168,9 @@ export function AttendanceManager({ userType }: AttendanceManagerProps) {
 
       {/* Student List */}
       <Card>
-        <CardHeader className="flex flex-row items-center justify-between">
-          <CardTitle>Student Attendance</CardTitle>
-          <Button onClick={saveAttendance} disabled={stats.notMarked > 0}>
+        <CardHeader className="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
+          <CardTitle className="text-base md:text-xl">Student Attendance</CardTitle>
+          <Button onClick={saveAttendance} disabled={stats.notMarked > 0} className="w-full md:w-auto">
             <Save className="h-4 w-4 mr-2" />
             Save Attendance
           </Button>
@@ -180,27 +180,27 @@ export function AttendanceManager({ userType }: AttendanceManagerProps) {
             {students.map((student) => (
               <div
                 key={student.id}
-                className="flex items-center justify-between p-3 border border-border rounded-lg hover:bg-muted/50"
+                className="flex flex-col md:flex-row md:items-center md:justify-between gap-2 p-3 border border-border rounded-lg hover:bg-muted/50"
               >
-                <div className="flex items-center space-x-3">
+                <div className="flex items-center gap-3">
                   <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-sm font-medium">
                     {student.rollNumber}
                   </div>
                   <div>
-                    <div className="font-medium">{student.name}</div>
-                    <div className="text-sm text-muted-foreground">Roll No: {student.rollNumber}</div>
+                    <div className="font-medium text-sm md:text-base">{student.name}</div>
+                    <div className="text-xs md:text-sm text-muted-foreground">Roll No: {student.rollNumber}</div>
                   </div>
                 </div>
 
-                <div className="flex items-center space-x-2">
+                <div className="flex flex-col md:flex-row items-center gap-2">
                   <Badge variant="outline" className={getStatusColor(student.status)}>
-                    <div className="flex items-center space-x-1">
+                    <div className="flex items-center gap-1">
                       {getStatusIcon(student.status)}
-                      <span className="capitalize">{student.status.replace("_", " ")}</span>
+                      <span className="capitalize text-xs md:text-sm">{student.status.replace("_", " ")}</span>
                     </div>
                   </Badge>
 
-                  <div className="flex space-x-1">
+                  <div className="flex gap-1">
                     <Button
                       size="sm"
                       variant={student.status === "present" ? "default" : "outline"}

@@ -62,7 +62,7 @@ export function AdminSettings() {
           <CardContent className="space-y-8">
             <div className="flex items-center space-x-8">
               <Avatar className="w-28 h-28 ring-4 ring-primary/20 shadow-lg transition-all duration-300">
-                <AvatarImage src={schoolData.logo || "/placeholder.svg"} alt="Logo École" />
+                <AvatarImage src={schoolData.logo || "/logo.svg"} alt="Logo École" />
                 <AvatarFallback className="bg-gradient-to-br from-primary to-accent text-white text-2xl font-bold">
                   <School className="w-10 h-10" />
                 </AvatarFallback>

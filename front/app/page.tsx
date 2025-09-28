@@ -152,25 +152,25 @@ export default function HomePage() {
 
       {/* Header */}
       <header className="bg-card/80 backdrop-blur-md border-b border-border sticky top-0 z-50">
-        <div className="container mx-auto px-4 sm:px-6 py-4">
+  <div className="container mx-auto px-4 sm:px-6 py-6">
           <div className="flex items-center justify-between">
             <Link
               href="/"
               className="flex items-center space-x-2 sm:space-x-3 rtl:space-x-reverse hover:opacity-80 transition-opacity"
-              aria-label="DiLo Connect - Accueil"
+              aria-label="Accueil"
             >
-              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-white rounded-lg flex items-center justify-center border border-gray-200">
-                <NextImage 
-                  src="/White_and_Purple_Modern_School_Logo-removebg-preview.png" 
-                  alt="School Logo" 
-                  width={40}
-                  height={40}
-                  className="object-contain"
-                  priority
-                />
+              <div className="relative flex items-center">
+                <div className="w-16 h-16 sm:w-24 sm:h-24 -mt-4 -mb-4 bg-white rounded-lg flex items-center justify-center border border-gray-200 overflow-visible">
+                  <NextImage 
+                    src="/logo.svg" 
+                    alt="School Logo" 
+                    width={120}
+                    height={120}
+                    className="object-contain"
+                    priority
+                  />
+                </div>
               </div>
-              <h1 className="text-lg sm:text-2xl font-bold text-foreground hidden sm:block">{t.homepage.title}</h1>
-              <h1 className="text-lg font-bold text-foreground sm:hidden">DiLo</h1>
             </Link>
             
             {/* Desktop Navigation */}
@@ -182,6 +182,11 @@ export default function HomePage() {
                 <Link href="/auth/signup">{t.common.signUp}</Link>
               </Button>
               <ThemeToggle />
+              {/*
+              <Button variant="ghost" size="sm" asChild>
+                <Link href="/recommendations">Recommandations</Link>
+              </Button>
+              */}
             </div>
 
             {/* Mobile Navigation */}
@@ -301,7 +306,7 @@ export default function HomePage() {
                           </div>
                         </div>
                         <div className="space-y-3">
-                          <h3 className="text-xl font-bold text-foreground">DiLo Connect</h3>
+                          {/* <h3 className="text-xl font-bold text-foreground">DiLo Connect</h3> */}
                           <p className="text-muted-foreground max-w-xs mx-auto">
                             Connectons les écoles, les familles et les enseignants pour une éducation collaborative
                           </p>
@@ -412,10 +417,10 @@ export default function HomePage() {
           <div className="grid lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
             {userTypes.map((userType, index) => {
               const Icon = userType.icon
+              const isParent = userType.type === "parent"
               return (
                 <Card key={index} className="card-playful text-left group hover:shadow-2xl transition-all duration-500 overflow-hidden">
                   <div className={`h-2 ${userType.color}`}></div>
-                  
                   <CardHeader className="pb-4">
                     <div className="flex items-start justify-between mb-4">
                       <div>
@@ -443,12 +448,19 @@ export default function HomePage() {
 
                     {/* CTA Button */}
                     <div className="pt-6">
-                      <Button className="btn-fun w-full hover:scale-105 transition-transform duration-200 group-hover:shadow-lg" asChild>
-                        <Link href={userType.href}>
+                      {isParent ? (
+                        <Button className="btn-fun w-full" disabled>
                           Découvrir mon espace
                           <Zap className="w-4 h-4 ml-2" />
-                        </Link>
-                      </Button>
+                        </Button>
+                      ) : (
+                        <Button className="btn-fun w-full hover:scale-105 transition-transform duration-200 group-hover:shadow-lg" asChild>
+                          <Link href={userType.href}>
+                            Découvrir mon espace
+                            <Zap className="w-4 h-4 ml-2" />
+                          </Link>
+                        </Button>
+                      )}
                     </div>
                   </CardContent>
                 </Card>
@@ -681,15 +693,6 @@ export default function HomePage() {
         <div className="container mx-auto px-4 sm:px-6 py-8">
           <div className="text-center">
             <div className="flex items-center justify-center space-x-3 rtl:space-x-reverse mb-4">
-              <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center border border-gray-200" aria-hidden="true">
-                <NextImage 
-                  src="/White_and_Purple_Modern_School_Logo-removebg-preview.png" 
-                  alt="School Logo" 
-                  width={24}
-                  height={24}
-                  className="object-contain"
-                />
-              </div>
               <h3 className="text-xl font-bold text-foreground">{t.homepage.title}</h3>
             </div>
             <p className="text-muted-foreground mb-6">Rendre la communication scolaire facile et amusante pour tous!</p>
@@ -721,7 +724,7 @@ export default function HomePage() {
             
             <div className="mt-6 pt-6 border-t border-border">
               <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
-                <p className="text-sm text-muted-foreground order-2 sm:order-1">{t.homepage.footer}</p>
+                <p className="text-sm text-muted-foreground order-2 sm:order-1">{t.homepage.footer.replace('DiLo Connect', '').trim() || 'Tous droits réservés.'}</p>
                 <div className="order-1 sm:order-2">
                   <LanguageSwitcherInline />
                 </div>
