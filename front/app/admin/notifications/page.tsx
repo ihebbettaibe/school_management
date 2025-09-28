@@ -4,12 +4,8 @@ import { NotificationCenter } from "@/components/notifications/notification-cent
 export default function AdminNotificationsPage() {
   return (
     <AppLayout>
-  <div className="px-2 py-4 sm:px-4 sm:py-8 md:p-16 space-y-6 max-w-6xl mx-auto w-full">
-        <div>
-          <h1 className="text-2xl font-bold text-foreground">Notifications</h1>
-          <p className="text-muted-foreground">System notifications and alerts</p>
-        </div>
-
+      <div className="p-4 max-w-3xl mx-auto w-full">
+        <h1 className="text-xl font-bold mb-2">Notifications</h1>
         <NotificationCenter userType="admin" />
       </div>
     </AppLayout>

@@ -39,14 +39,14 @@ export function AdminSettings() {
 
   return (
     <Tabs defaultValue="school" className="space-y-8">
-      <TabsList className="grid w-full grid-cols-2 bg-gradient-to-r from-blue-200 to-purple-200 border-4 border-primary rounded-lg p-5 min-h-[68px] shadow-2xl mb-8">
-        <TabsTrigger value="school" className="flex items-center gap-3 py-3 px-6 items-center font-bold text-lg font-sans transition-all duration-300 hover:scale-105 relative group shadow min-h-[48px]">
+  <TabsList className="flex flex-wrap gap-6 justify-start items-center py-4 rounded-lg shadow-2xl mb-8 bg-white">
+        <TabsTrigger value="school" className="flex items-center gap-3 px-6 py-3 font-bold text-base sm:text-lg font-sans transition-all duration-300 hover:scale-105 relative group shadow min-h-[48px] bg-white">
           <School className="w-6 h-6" />
-          <span className="text-lg font-semibold font-sans">Profil École</span>
+          <span className="font-semibold font-sans">Profil École</span>
         </TabsTrigger>
-        <TabsTrigger value="settings" className="flex items-center gap-3 py-3 px-6 items-center font-bold text-lg font-sans transition-all duration-300 hover:scale-105 relative group shadow min-h-[48px]">
+        <TabsTrigger value="settings" className="flex items-center gap-3 px-6 py-3 font-bold text-base sm:text-lg font-sans transition-all duration-300 hover:scale-105 relative group shadow min-h-[48px] bg-white">
           <Settings className="w-6 h-6" />
-          <span className="text-lg font-semibold font-sans">Paramètres</span>
+          <span className="font-semibold font-sans">Paramètres</span>
         </TabsTrigger>
       </TabsList>
 

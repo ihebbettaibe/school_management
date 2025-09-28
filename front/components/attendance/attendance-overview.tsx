@@ -80,7 +80,7 @@ export function AttendanceOverview({}: AttendanceOverviewProps) {
   const stats = getTotalStats()
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6 sm:space-y-8 w-full">
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
@@ -108,27 +108,27 @@ export function AttendanceOverview({}: AttendanceOverviewProps) {
 
       <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
         <Card>
-          <CardContent className="p-6 text-center">
-            <div className="text-3xl font-bold text-primary mb-2">{stats.overallRate}%</div>
-            <div className="text-sm text-muted-foreground">Taux Global</div>
+          <CardContent className="p-4 sm:p-6 text-center">
+            <div className="text-xl sm:text-2xl md:text-3xl font-bold text-primary mb-2">{stats.overallRate}%</div>
+            <div className="text-xs sm:text-sm text-muted-foreground">Taux Global</div>
           </CardContent>
         </Card>
         <Card>
-          <CardContent className="p-6 text-center">
-            <div className="text-3xl font-bold text-success mb-2">{stats.totalPresent}</div>
-            <div className="text-sm text-muted-foreground">Présents</div>
+          <CardContent className="p-4 sm:p-6 text-center">
+            <div className="text-xl sm:text-2xl md:text-3xl font-bold text-success mb-2">{stats.totalPresent}</div>
+            <div className="text-xs sm:text-sm text-muted-foreground">Présents</div>
           </CardContent>
         </Card>
         <Card>
-          <CardContent className="p-6 text-center">
-            <div className="text-3xl font-bold text-error mb-2">{stats.totalAbsent}</div>
-            <div className="text-sm text-muted-foreground">Absents</div>
+          <CardContent className="p-4 sm:p-6 text-center">
+            <div className="text-xl sm:text-2xl md:text-3xl font-bold text-error mb-2">{stats.totalAbsent}</div>
+            <div className="text-xs sm:text-sm text-muted-foreground">Absents</div>
           </CardContent>
         </Card>
         <Card>
-          <CardContent className="p-6 text-center">
-            <div className="text-3xl font-bold text-muted-foreground mb-2">{stats.totalStudents}</div>
-            <div className="text-sm text-muted-foreground">Total Étudiants</div>
+          <CardContent className="p-4 sm:p-6 text-center">
+            <div className="text-xl sm:text-2xl md:text-3xl font-bold text-muted-foreground mb-2">{stats.totalStudents}</div>
+            <div className="text-xs sm:text-sm text-muted-foreground">Total Étudiants</div>
           </CardContent>
         </Card>
       </div>
@@ -138,15 +138,16 @@ export function AttendanceOverview({}: AttendanceOverviewProps) {
           <CardTitle>Tendance Hebdomadaire des Présences</CardTitle>
         </CardHeader>
         <CardContent>
-          <ChartContainer
-            config={{
-              present: { label: "Présent %", color: "#22c55e" },
-              absent: { label: "Absent %", color: "#ef4444" },
-            }}
-            className="h-80"
-          >
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={chartData} margin={{ top: 20, right: 30, left: 20, bottom: 20 }}>
+          <div className="w-full h-[260px] sm:h-[320px] md:h-80">
+            <ChartContainer
+              config={{
+                present: { label: "Présent %", color: "#22c55e" },
+                absent: { label: "Absent %", color: "#ef4444" },
+              }}
+              className="h-full"
+            >
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={chartData} margin={{ top: 20, right: 30, left: 20, bottom: 20 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
                 <XAxis
                   dataKey="name"
@@ -165,6 +166,7 @@ export function AttendanceOverview({}: AttendanceOverviewProps) {
                   radius={[4, 4, 0, 0]}
                   stroke="white"
                   strokeWidth={1}
+                  barSize={24}
                 />
                 <Bar
                   dataKey="absent"
@@ -173,10 +175,12 @@ export function AttendanceOverview({}: AttendanceOverviewProps) {
                   radius={[4, 4, 0, 0]}
                   stroke="white"
                   strokeWidth={1}
+                  barSize={24}
                 />
               </BarChart>
             </ResponsiveContainer>
-          </ChartContainer>
+            </ChartContainer>
+          </div>
         </CardContent>
       </Card>
 
@@ -193,22 +197,22 @@ export function AttendanceOverview({}: AttendanceOverviewProps) {
             {mockClassAttendance.map((classData, index) => (
               <div
                 key={index}
-                className="flex items-center justify-between p-4 border border-border rounded-lg hover:bg-muted/50"
+                className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-4 p-3 sm:p-4 border border-border rounded-lg hover:bg-muted/50"
               >
-                <div className="flex items-center space-x-3">
-                  <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center">
+                <div className="flex items-center gap-2 sm:gap-3">
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 bg-primary/10 rounded-full flex items-center justify-center">
                     <Users className="h-4 w-4 text-primary" />
                   </div>
                   <div>
-                    <div className="font-medium">{classData.className}</div>
-                    <div className="text-sm text-muted-foreground">{classData.totalStudents} students</div>
+                    <div className="font-medium text-xs sm:text-sm md:text-base">{classData.className}</div>
+                    <div className="text-xs sm:text-sm text-muted-foreground">{classData.totalStudents} students</div>
                   </div>
                 </div>
 
-                <div className="flex items-center space-x-4">
+                <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
                   <div className="text-right">
-                    <div className="text-sm text-muted-foreground">Present: {classData.presentToday}</div>
-                    <div className="text-sm text-muted-foreground">
+                    <div className="text-xs sm:text-sm text-muted-foreground">Present: {classData.presentToday}</div>
+                    <div className="text-xs sm:text-sm text-muted-foreground">
                       Absent: {classData.absentToday} | Late: {classData.lateToday}
                     </div>
                   </div>

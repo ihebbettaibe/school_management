@@ -120,8 +120,8 @@ export function AdminDashboard() {
   const pendingCount = teacherApprovals.filter((teacher) => teacher.status === "pending").length
 
   return (
-    <div className="space-y-12 p-10">
-      <div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-6 gap-8">
+    <div className="space-y-8 sm:space-y-10 md:space-y-12 px-2 sm:px-4 md:px-8 py-4 sm:py-8 w-full">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-4 sm:gap-6 md:gap-8">
         {/* Stat Cards */}
         <Card className="hover:shadow-xl transition-shadow border-2 border-primary/20 rounded-2xl">
           <CardContent className="p-8 flex flex-col items-center justify-center">
@@ -179,63 +179,70 @@ export function AdminDashboard() {
         </Card>
       </div>
 
-      <div className="grid grid-cols-1 xl:grid-cols-2 gap-12">
-        <Card className="shadow-lg border-2 border-primary/10 rounded-2xl">
+  <div className="flex flex-col gap-8 w-full max-w-3xl mx-auto">
+    <Card className="shadow-lg border-2 border-primary/10 rounded-2xl w-full min-h-[340px]">
           <CardHeader className="flex flex-row items-center justify-between pb-6">
-            <CardTitle className="text-2xl font-bold text-primary">Demandes d'Enseignants en Attente</CardTitle>
-            <Button variant="outline" size="lg" onClick={() => setShowApprovalsDialog(true)} className="btn-fun">
+            <CardTitle className="text-xl sm:text-2xl font-bold text-primary">Demandes d'Enseignants en Attente</CardTitle>
+            <Button
+              variant="outline"
+              size="lg"
+              onClick={() => setShowApprovalsDialog(true)}
+              className="bg-gray-800 text-white border-gray-800 hover:bg-gray-900 hover:text-white"
+            >
               <Eye className="w-5 h-5 mr-2" />
               Voir Tout
             </Button>
           </CardHeader>
           <CardContent className="space-y-6">
-            {teacherApprovals.slice(0, 2).map((teacher) => (
-              <div
-                key={teacher.id}
-                className="flex items-center justify-between p-6 border border-border rounded-2xl hover:bg-accent/5 transition-colors"
-              >
-                <div className="flex items-center space-x-6">
-                  <Avatar className="w-16 h-16">
-                    <AvatarFallback className="bg-gradient-to-br from-primary to-accent text-white text-xl font-bold">
-                      {teacher.name
-                        .split(" ")
-                        .map((n) => n[0])
-                        .join("")}
-                    </AvatarFallback>
-                  </Avatar>
-                  <div>
-                    <h4 className="font-bold text-xl text-primary">{teacher.name}</h4>
-                    <p className="text-lg text-muted-foreground">{teacher.email}</p>
-                    <p className="text-base text-muted-foreground">
-                      {teacher.subjects.join(", ")} • {teacher.experience}
-                    </p>
-                    <p className="text-sm text-muted-foreground mt-2">
-                      Soumis le: {new Date(teacher.submittedDate).toLocaleDateString("fr-FR")}
-                    </p>
+            <div className="flex flex-col gap-4">
+              {teacherApprovals.slice(0, 2).map((teacher) => (
+                <div
+                  key={teacher.id}
+                  className="flex flex-col sm:flex-row sm:items-center sm:justify-between p-4 sm:p-6 border border-border rounded-2xl hover:bg-accent/5 transition-colors gap-4"
+                >
+                  <div className="flex flex-row items-center gap-4 sm:gap-6">
+                    <Avatar className="w-14 h-14 sm:w-16 sm:h-16">
+                      <AvatarFallback className="bg-gradient-to-br from-primary to-accent text-white text-lg sm:text-xl font-bold">
+                        {teacher.name
+                          .split(" ")
+                          .map((n) => n[0])
+                          .join("")}
+                      </AvatarFallback>
+                    </Avatar>
+                    <div>
+                      <h4 className="font-bold text-base sm:text-xl text-primary">{teacher.name}</h4>
+                      <p className="text-sm sm:text-lg text-muted-foreground">{teacher.email}</p>
+                      <p className="text-xs sm:text-base text-muted-foreground">
+                        {teacher.subjects.join(", ")} • {teacher.experience}
+                      </p>
+                      <p className="text-xs sm:text-sm text-muted-foreground mt-2">
+                        Soumis le: {new Date(teacher.submittedDate).toLocaleDateString("fr-FR")}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex gap-2 flex-wrap sm:flex-nowrap">
+                    <Button size="sm" className="px-3" onClick={() => handleApproveTeacher(teacher.id)}>
+                      <CheckCircle className="w-4 h-4 mr-1" />
+                      Approuver
+                    </Button>
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      className="px-3 bg-transparent"
+                      onClick={() => handleUnderReviewTeacher(teacher.id)}
+                    >
+                      <Eye className="w-4 h-4 mr-1" />
+                      Examiner
+                    </Button>
                   </div>
                 </div>
-                <div className="flex space-x-2">
-                  <Button size="sm" className="px-3" onClick={() => handleApproveTeacher(teacher.id)}>
-                    <CheckCircle className="w-4 h-4 mr-1" />
-                    Approuver
-                  </Button>
-                  <Button
-                    size="sm"
-                    variant="outline"
-                    className="px-3 bg-transparent"
-                    onClick={() => handleUnderReviewTeacher(teacher.id)}
-                  >
-                    <Eye className="w-4 h-4 mr-1" />
-                    Examiner
-                  </Button>
-                </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </CardContent>
         </Card>
 
         {/* Recent Activity */}
-        <Card className="shadow-sm">
+  <Card className="shadow-sm w-full min-h-[340px]">
           <CardHeader className="pb-4">
             <CardTitle className="text-xl">Activité Récente</CardTitle>
           </CardHeader>

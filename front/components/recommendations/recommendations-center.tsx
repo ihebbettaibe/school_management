@@ -224,13 +224,11 @@ export function RecommendationsCenter({ userType }: RecommendationsCenterProps) 
       {/* Recommendations List */}
       {userType === "admin" ? (
         <Tabs defaultValue="all" className="space-y-4">
-          <TabsList className="grid w-full grid-cols-4">
-            <TabsTrigger value="all">Toutes ({recommendations.length})</TabsTrigger>
-            <TabsTrigger value="pending">En attente ({filteredRecommendations("pending").length})</TabsTrigger>
-            <TabsTrigger value="under-review">
-              En révision ({filteredRecommendations("under-review").length})
-            </TabsTrigger>
-            <TabsTrigger value="approved">Approuvées ({filteredRecommendations("approved").length})</TabsTrigger>
+          <TabsList className="flex flex-wrap gap-4 justify-start items-center py-2">
+            <TabsTrigger value="all" className="truncate text-xs sm:text-sm md:text-base px-4 py-2">Toutes ({recommendations.length})</TabsTrigger>
+            <TabsTrigger value="pending" className="truncate text-xs sm:text-sm md:text-base px-4 py-2">En attente ({filteredRecommendations("pending").length})</TabsTrigger>
+            <TabsTrigger value="under-review" className="truncate text-xs sm:text-sm md:text-base px-4 py-2">En révision ({filteredRecommendations("under-review").length})</TabsTrigger>
+            <TabsTrigger value="approved" className="truncate text-xs sm:text-sm md:text-base px-4 py-2">Approuvées ({filteredRecommendations("approved").length})</TabsTrigger>
           </TabsList>
 
           <TabsContent value="all">
@@ -288,18 +286,18 @@ function RecommendationsList({
   const [selectedRecommendation, setSelectedRecommendation] = useState("")
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-6 sm:space-y-8 md:space-y-10 lg:space-y-12">
       {recommendations.map((recommendation) => (
-        <Card key={recommendation.id}>
-          <CardContent className="p-6">
-            <div className="flex justify-between items-start mb-4">
+        <Card key={recommendation.id} className="rounded-xl shadow-sm">
+          <CardContent className="p-4 sm:p-8 md:p-10 lg:p-12">
+            <div className="flex flex-col gap-4 sm:flex-row sm:justify-between sm:items-start mb-6">
               <div className="flex-1">
-                <div className="flex items-center space-x-3 mb-2">
-                  <h3 className="text-xl font-bold text-primary font-sans">{recommendation.category}</h3>
-                  <Badge variant="outline" className="text-base px-3 py-1 border-primary/40">{recommendation.category}</Badge>
+                <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-4 mb-4">
+                  <h3 className="text-base sm:text-xl md:text-2xl font-bold text-primary font-sans">{recommendation.category}</h3>
+                  <Badge variant="outline" className="text-xs sm:text-base md:text-lg px-2 sm:px-4 py-1 border-primary/40">{recommendation.category}</Badge>
                 </div>
-                <p className="text-lg text-foreground mb-3 font-sans">{recommendation.description}</p>
-                <div className="flex items-center space-x-4 text-base text-muted-foreground font-sans">
+                <p className="text-sm sm:text-lg md:text-xl text-foreground mb-4 font-sans">{recommendation.description}</p>
+                <div className="flex flex-wrap items-center gap-2 text-xs sm:text-base md:text-lg text-muted-foreground font-sans">
                   <span>
                     Par <span className="font-semibold text-primary">{recommendation.submittedBy}</span> ({recommendation.userType === "parent" ? "parent" : "enseignant"})
                   </span>
@@ -309,12 +307,12 @@ function RecommendationsList({
                   <span>{recommendation.votes} votes</span>
                 </div>
               </div>
-              <div className="flex items-center space-x-2">
+              <div className="flex items-center space-x-2 mt-4 sm:mt-0">
                 {getStatusIcon(recommendation.status)}
-                <Badge className={getStatusColor(recommendation.status) + " text-base px-3 py-1 font-semibold border-2 border-primary/20"}>
+                <Badge className={getStatusColor(recommendation.status) + " text-xs sm:text-base md:text-lg px-2 sm:px-4 py-1 font-semibold border-2 border-primary/20"}>
                   {recommendation.status === "approved"
                     ? "Approuvé"
-                    : recommendation.status === "rejected"
+                    : recommendation.status === "rejeté"
                       ? "Rejeté"
                       : recommendation.status === "under-review"
                         ? "En révision"
@@ -324,45 +322,39 @@ function RecommendationsList({
             </div>
 
             {userType !== "admin" && (
-              <div className="flex items-center space-x-4 mb-4">
-                <div className="flex items-center space-x-2">
-                  <Button
-                    variant="outline"
-                    size="lg"
-                    onClick={() => onVote?.(recommendation.id, "up")}
-                    className="flex items-center space-x-2 text-lg font-semibold border-primary/40"
-                  >
-                    <ThumbsUp className="w-5 h-5 text-green-600" />
-                    <span>{recommendation.upvotes}</span>
-                  </Button>
-                  <Button
-                    variant="outline"
-                    size="lg"
-                    onClick={() => onVote?.(recommendation.id, "down")}
-                    className="flex items-center space-x-2 text-lg font-semibold border-primary/40"
-                  >
-                    <ThumbsDown className="w-5 h-5 text-red-600" />
-                    <span>{recommendation.downvotes}</span>
-                  </Button>
-                </div>
+              <div className="flex flex-wrap items-center gap-4 mb-6">
+                <Button
+                  variant="outline"
+                  size="lg"
+                  onClick={() => onVote?.(recommendation.id, "up")}
+                  className="flex items-center space-x-2 text-xs sm:text-lg md:text-xl font-semibold border-primary/40"
+                >
+                  <ThumbsUp className="w-4 sm:w-5 md:w-6 h-4 sm:h-5 md:h-6 text-green-600" />
+                  <span>{recommendation.upvotes}</span>
+                </Button>
+                <Button
+                  variant="outline"
+                  size="lg"
+                  onClick={() => onVote?.(recommendation.id, "down")}
+                  className="flex items-center space-x-2 text-xs sm:text-lg md:text-xl font-semibold border-primary/40"
+                >
+                  <ThumbsDown className="w-4 sm:w-5 md:w-6 h-4 sm:h-5 md:h-6 text-red-600" />
+                  <span>{recommendation.downvotes}</span>
+                </Button>
               </div>
             )}
 
             {recommendation.adminResponse && (
-              <div className="mt-4 p-4 bg-primary/10 border-l-4 border-primary rounded-lg">
-                <p className="text-base font-semibold text-primary mb-1">Réponse de l'administration:</p>
-                <p className="text-base text-foreground">{recommendation.adminResponse}</p>
+              <div className="mt-6 p-2 sm:p-4 md:p-6 bg-primary/10 border-l-4 border-primary rounded-lg">
+                <p className="text-xs sm:text-base md:text-lg font-semibold text-primary mb-2">Réponse de l'administration:</p>
+                <p className="text-xs sm:text-base md:text-lg text-foreground">{recommendation.adminResponse}</p>
               </div>
             )}
 
             {userType === "admin" && recommendation.status === "pending" && (
-              <div className="mt-4 flex space-x-2">
-                <Button size="sm" onClick={() => onStatusUpdate?.(recommendation.id, "under-review")}>
-                  Approuver
-                </Button>
-                <Button size="sm" onClick={() => onStatusUpdate?.(recommendation.id, "under-review")}>
-                  En révision
-                </Button>
+              <div className="mt-6 flex flex-wrap gap-4">
+                <Button size="sm" onClick={() => onStatusUpdate?.(recommendation.id, "under-review")}>Approuver</Button>
+                <Button size="sm" onClick={() => onStatusUpdate?.(recommendation.id, "under-review")}>En révision</Button>
                 <Button
                   size="sm"
                   variant="outline"

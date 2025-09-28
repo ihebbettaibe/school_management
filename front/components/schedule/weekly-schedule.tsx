@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from "react"
+import { useState } from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { ScheduleBlock } from "./schedule-block"
 import { ScheduleDetailModal } from "./schedule-detail-modal"
@@ -95,39 +95,41 @@ export function WeeklySchedule({ userType }: WeeklyScheduleProps) {
   return (
     <>
       <Card className="shadow-none border border-gray-200 max-w-7xl mx-auto">
-        <CardContent className="p-12">
-          <div className="grid grid-cols-6 gap-4">
-            {/* Header row */}
-            <div className="font-extrabold text-center p-6 text-xl text-gray-700 bg-gray-50 border-b border-gray-200 tracking-wide">Time</div>
-            {days.map((day) => (
-              <div key={day} className="font-extrabold text-center p-6 text-xl text-gray-700 bg-gray-50 border-b border-gray-200 tracking-wide">
-                {day.slice(0, 3)}
-              </div>
-            ))}
-
-            {/* Schedule grid */}
-            {timeSlots.map((time) => (
-              <React.Fragment key={time}>
-                <div
-                  key={`time-${time}`}
-                  className="text-xl text-gray-700 text-center p-6 border-r border-gray-200 bg-white font-bold"
-                >
-                  {time}
+        <CardContent className="p-2 sm:p-6 md:p-12">
+          <div className="overflow-x-auto w-full">
+            <div className="min-w-[600px] grid grid-cols-6 gap-2 sm:gap-4">
+              {/* Header row */}
+              <div className="font-extrabold text-center p-2 sm:p-4 md:p-6 text-base sm:text-lg md:text-xl text-gray-700 bg-gray-50 border-b border-gray-200 tracking-wide sticky left-0 z-10 bg-gray-50">Time</div>
+              {days.map((day) => (
+                <div key={day} className="font-extrabold text-center p-2 sm:p-4 md:p-6 text-base sm:text-lg md:text-xl text-gray-700 bg-gray-50 border-b border-gray-200 tracking-wide">
+                  {day.slice(0, 3)}
                 </div>
-                {days.map((day) => {
-                  const item = getScheduleItem(day, time)
-                  return (
-                    <div key={`${day}-${time}`} className="p-2">
-                      {item ? (
-                        <ScheduleBlock item={item} onClick={() => setSelectedItem(item)} className="h-28 text-xl" />
-                      ) : (
-                        <div className="h-28 border border-dashed border-gray-200 rounded-md bg-gray-50"></div>
-                      )}
-                    </div>
-                  )
-                })}
-              </React.Fragment>
-            ))}
+              ))}
+
+              {/* Schedule grid */}
+              {timeSlots.map((time) => (
+                <>
+                  <div
+                    key={`time-${time}`}
+                    className="text-base sm:text-lg md:text-xl text-gray-700 text-center p-2 sm:p-4 md:p-6 border-r border-gray-200 bg-white font-bold sticky left-0 z-10 bg-white"
+                  >
+                    {time}
+                  </div>
+                  {days.map((day) => {
+                    const item = getScheduleItem(day, time)
+                    return (
+                      <div key={`${day}-${time}`} className="p-1 sm:p-2 md:p-3">
+                        {item ? (
+                          <ScheduleBlock item={item} onClick={() => setSelectedItem(item)} className="h-16 sm:h-20 md:h-28 text-base sm:text-lg md:text-xl" />
+                        ) : (
+                          <div className="h-16 sm:h-20 md:h-28 border border-dashed border-gray-200 rounded-md bg-gray-50"></div>
+                        )}
+                      </div>
+                    )
+                  })}
+                </>
+              ))}
+            </div>
           </div>
         </CardContent>
       </Card>

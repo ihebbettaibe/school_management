@@ -214,49 +214,49 @@ export function PaymentForm() {
       {/* Progress Steps */}
       <Card>
         <CardContent className="p-4">
-          <div className="flex items-center justify-between">
+          <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-4 md:gap-6">
             <div
               className={`flex items-center space-x-2 ${currentStep >= 1 ? "text-primary" : "text-muted-foreground"}`}
             >
               <div
-                className={`w-10 h-10 rounded-full flex items-center justify-center text-lg font-bold ${currentStep >= 1 ? "bg-primary text-primary-foreground" : "bg-muted"}`}
+                className={`w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center text-base sm:text-lg font-bold ${currentStep >= 1 ? "bg-primary text-primary-foreground" : "bg-muted"}`}
               >
                 1
               </div>
-              <span className="font-semibold text-lg font-sans">Select Children</span>
+              <span className="font-semibold text-sm sm:text-base md:text-lg font-sans">Select Children</span>
             </div>
             <ArrowRight className="w-4 h-4 text-muted-foreground" />
             <div
               className={`flex items-center space-x-2 ${currentStep >= 2 ? "text-primary" : "text-muted-foreground"}`}
             >
               <div
-                className={`w-10 h-10 rounded-full flex items-center justify-center text-lg font-bold ${currentStep >= 2 ? "bg-primary text-primary-foreground" : "bg-muted"}`}
+                className={`w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center text-base sm:text-lg font-bold ${currentStep >= 2 ? "bg-primary text-primary-foreground" : "bg-muted"}`}
               >
                 2
               </div>
-              <span className="font-semibold text-lg font-sans">Payment Method</span>
+              <span className="font-semibold text-sm sm:text-base md:text-lg font-sans">Payment Method</span>
             </div>
             <ArrowRight className="w-4 h-4 text-muted-foreground" />
             <div
               className={`flex items-center space-x-2 ${currentStep >= 3 ? "text-primary" : "text-muted-foreground"}`}
             >
               <div
-                className={`w-10 h-10 rounded-full flex items-center justify-center text-lg font-bold ${currentStep >= 3 ? "bg-primary text-primary-foreground" : "bg-muted"}`}
+                className={`w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center text-base sm:text-lg font-bold ${currentStep >= 3 ? "bg-primary text-primary-foreground" : "bg-muted"}`}
               >
                 3
               </div>
-              <span className="font-semibold text-lg font-sans">Payment Details</span>
+              <span className="font-semibold text-sm sm:text-base md:text-lg font-sans">Payment Details</span>
             </div>
             <ArrowRight className="w-4 h-4 text-muted-foreground" />
             <div
               className={`flex items-center space-x-2 ${currentStep >= 4 ? "text-primary" : "text-muted-foreground"}`}
             >
               <div
-                className={`w-10 h-10 rounded-full flex items-center justify-center text-lg font-bold ${currentStep >= 4 ? "bg-primary text-primary-foreground" : "bg-muted"}`}
+                className={`w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center text-base sm:text-lg font-bold ${currentStep >= 4 ? "bg-primary text-primary-foreground" : "bg-muted"}`}
               >
                 4
               </div>
-              <span className="font-semibold text-lg font-sans">Confirm</span>
+              <span className="font-semibold text-sm sm:text-base md:text-lg font-sans">Confirm</span>
             </div>
           </div>
         </CardContent>
